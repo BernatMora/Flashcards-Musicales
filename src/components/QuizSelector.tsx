@@ -1,103 +1,134 @@
-import { QuestionGroup } from '../types/music';
+import React from 'react';
+import { Music, ArrowRight, BookOpen, Target, Settings } from 'lucide-react';
 
-// GRUPOS DE NÚMEROS ROMANOS → ACORDES
-const progressionDirectGroups: QuestionGroup[] = [
-  {
-    id: 'basic-ii-v-i',
-    name: 'ii-V-I Básico',
-    description: 'Progresiones ii-V-I en todas las tonalidades mayores y menores',
-    category: 'progression-direct',
-    totalQuestions: 15,
-    questions: [
-      {
-        id: 'ii-v-i-c-1',
-        type: 'progression-direct',
-        question: 'iim7 - V7 - Imaj7 en C',
-        answer: 'Dm7 - G7 - Cmaj7',
-        options: ['Dm7 - G7 - Cmaj7', 'Em7 - A7 - Dmaj7', 'Am7 - D7 - Gmaj7', 'Fm7 - Bb7 - Ebmaj7'],
-        explanation: 'En la tonalidad de C mayor, el ii grado es Dm7, el V grado es G7, y el I grado es Cmaj7.',
-        data: { key: 'C', romanNumerals: ['iim7', 'V7', 'Imaj7'] }
-      },
-      {
-        id: 'ii-v-i-f-1',
-        type: 'progression-direct',
-        question: 'iim7 - V7 - Imaj7 en F',
-        answer: 'Gm7 - C7 - Fmaj7',
-        options: ['Gm7 - C7 - Fmaj7', 'Am7 - D7 - Gmaj7', 'Dm7 - G7 - Cmaj7', 'Bm7 - E7 - Amaj7'],
-        explanation: 'En la tonalidad de F mayor, el ii grado es Gm7, el V grado es C7, y el I grado es Fmaj7.',
-        data: { key: 'F', romanNumerals: ['iim7', 'V7', 'Imaj7'] }
-      }
-    ]
-  }
-];
-
-// GRUPOS DE ACORDES → ANÁLISIS  
-const progressionInverseGroups: QuestionGroup[] = [
-  {
-    id: 'identify-ii-v-i',
-    name: 'Identificar ii-V-I',
-    description: 'Identifica progresiones ii-V-I mayores y menores en diferentes tonalidades',
-    category: 'progression-inverse',
-    totalQuestions: 15,
-    questions: [
-      {
-        id: 'identify-ii-v-i-c-1',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nDm7 - G7 - Cmaj7',
-        answer: 'ii-V-I en C',
-        options: ['ii-V-I en C', 'iii-VI-ii en F', 'vi-ii-V en Bb', 'i-IV-VII en Am'],
-        explanation: 'Dm7 - G7 - Cmaj7 es una progresión ii-V-I en la tonalidad de C mayor.',
-        data: { key: 'C', chords: ['Dm7', 'G7', 'Cmaj7'], romanNumerals: ['ii-V-I'] }
-      }
-    ]
-  }
-];
-
-// GRUPOS DE ESCALAS Y MODOS
-const scaleModeGroups: QuestionGroup[] = [
-  {
-    id: 'church-modes',
-    name: 'Modos Eclesiásticos',
-    description: 'Los 7 modos tradicionales derivados de la escala mayor',
-    category: 'scale-mode',
-    totalQuestions: 14,
-    questions: [
-      {
-        id: 'mode-ionian-c-1',
-        type: 'scale-mode',
-        question: '¿Qué modo se usa sobre Cmaj7?',
-        answer: 'C Jónico (Mayor)',
-        options: ['C Jónico (Mayor)', 'C Dórico', 'C Lidio', 'C Mixolidio'],
-        explanation: 'Sobre Cmaj7 se usa el modo C Jónico (escala mayor). Es el primer modo de la escala mayor.',
-        data: { scale: 'C Ionian', chord: 'Cmaj7' }
-      }
-    ]
-  }
-];
-
-// EXPORTAR TODOS LOS GRUPOS
-export const questionGroups: QuestionGroup[] = [
-  ...progressionDirectGroups,
-  ...progressionInverseGroups,
-  ...scaleModeGroups
-];
-
-// FUNCIÓN PARA OBTENER ESTADÍSTICAS
-export function getCategoryStats() {
-  const stats = {
-    'progression-direct': { groups: 0, questions: 0 },
-    'progression-inverse': { groups: 0, questions: 0 },
-    'scale-mode': { groups: 0, questions: 0 }
-  };
-
-  questionGroups.forEach(group => {
-    if (stats[group.category]) {
-      stats[group.category].groups++;
-      stats[group.category].questions += group.totalQuestions;
-    }
-  });
-
-  return stats;
+interface QuizSelectorProps {
+  onSelectQuiz: (type: 'progression-direct' | 'progression-inverse' | 'scale-mode', withSettings?: boolean) => void;
 }
 
-export default getCategoryStats
+export default function QuizSelector({ onSelectQuiz }: QuizSelectorProps) {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <Music className="w-12 h-12 text-blue-600" />
+            <h1 className="text-4xl font-bold text-gray-800">Flashcards Musicales</h1>
+          </div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Mejora tu conocimiento de teoría musical con ejercicios interactivos
+          </p>
+        </div>
+
+        {/* Quiz Options */}
+        <div className="grid md:grid-cols-3 gap-8 mb-8">
+          {/* Progression Direct */}
+          <div 
+            onClick={() => onSelectQuiz('progression-direct')}
+            className="bg-white rounded-2xl shadow-xl p-8 cursor-pointer transform hover:-translate-y-2 transition-all duration-300 border border-gray-100 hover:shadow-2xl"
+          >
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <ArrowRight className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                Números Romanos → Acordes
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Convierte progresiones en números romanos a acordes específicos
+              </p>
+              <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                <p className="text-sm text-gray-700 font-medium">Ejemplo:</p>
+                <p className="text-blue-600 font-mono">ii-V-I en C → Dm7-G7-Cmaj7</p>
+              </div>
+              <button className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                Comenzar
+              </button>
+            </div>
+          </div>
+
+          {/* Progression Inverse */}
+          <div 
+            onClick={() => onSelectQuiz('progression-inverse')}
+            className="bg-white rounded-2xl shadow-xl p-8 cursor-pointer transform hover:-translate-y-2 transition-all duration-300 border border-gray-100 hover:shadow-2xl"
+          >
+            <div className="text-center">
+              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Target className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                Acordes → Análisis
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Identifica progresiones y tonalidades a partir de acordes
+              </p>
+              <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                <p className="text-sm text-gray-700 font-medium">Ejemplo:</p>
+                <p className="text-green-600 font-mono">Dm7-G7-Cmaj7 → ii-V-I en C</p>
+              </div>
+              <button className="w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors font-semibold">
+                Comenzar
+              </button>
+            </div>
+          </div>
+
+          {/* Scale Mode */}
+          <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+            <div className="text-center">
+              <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <BookOpen className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                Escalas y Modos
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Practica escalas, modos y su relación con acordes
+              </p>
+              <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                <p className="text-sm text-gray-700 font-medium">Ejemplo:</p>
+                <p className="text-purple-600 font-mono">¿Qué escala usar sobre Dm7?</p>
+              </div>
+              
+              <div className="space-y-3">
+                <button 
+                  onClick={() => onSelectQuiz('scale-mode')}
+                  className="w-full bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors font-semibold"
+                >
+                  Modo Rápido
+                </button>
+                <button 
+                  onClick={() => onSelectQuiz('scale-mode', true)}
+                  className="w-full bg-purple-100 text-purple-700 py-3 px-6 rounded-lg hover:bg-purple-200 transition-colors font-semibold flex items-center justify-center gap-2"
+                >
+                  <Settings className="w-4 h-4" />
+                  Seleccionar Escalas
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">
+            Estadísticas de Contenido
+          </h3>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div className="text-2xl font-bold text-blue-600">50+</div>
+              <div className="text-sm text-gray-600">Progresiones</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-green-600">100+</div>
+              <div className="text-sm text-gray-600">Escalas</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-purple-600">12</div>
+              <div className="text-sm text-gray-600">Tonalidades</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

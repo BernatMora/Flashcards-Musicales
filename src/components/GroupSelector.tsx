@@ -9,7 +9,7 @@ interface GroupSelectorProps {
   onBack: () => void;
 }
 
-const GroupSelector: React.FC<GroupSelectorProps> = ({ selectedType, onSelectGroup, onBack }) => {
+export default function GroupSelector({ selectedType, onSelectGroup, onBack }: GroupSelectorProps) {
   const filteredGroups = questionGroups.filter(group => group.category === selectedType);
 
   const getCategoryTitle = () => {
@@ -117,6 +117,4 @@ const GroupSelector: React.FC<GroupSelectorProps> = ({ selectedType, onSelectGro
       </div>
     </div>
   );
-};
-
-export default GroupSelector;
+}
