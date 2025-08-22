@@ -1,7 +1,7 @@
 import React from 'react';
 import { QuestionGroup } from '../types/music';
 import { questionGroups } from '../data/questionGroups';
-import { ArrowLeft, BookOpen, Users, Music } from 'lucide-react';
+import { Music, ArrowRightLeft, Scale, ChevronRight, BookOpen } from 'lucide-react';
 
 interface GroupSelectorProps {
   selectedType: 'progression-direct' | 'progression-inverse' | 'scale-mode';
@@ -11,109 +11,94 @@ interface GroupSelectorProps {
 
 export default function GroupSelector({ selectedType, onSelectGroup, onBack }: GroupSelectorProps) {
   const filteredGroups = questionGroups.filter(group => group.category === selectedType);
-
-  const getCategoryTitle = () => {
+  
+  const getTypeInfo = () => {
     switch (selectedType) {
       case 'progression-direct':
-        return 'Números Romanos → Acordes';
+        return {
+          title: 'Números Romanos → Acordes',
+          description: 'Convierte análisis armónico en acordes reales',
+          icon: Music,
+          color: 'from-blue-500 to-blue-600'
+        };
       case 'progression-inverse':
-        return 'Acordes → Análisis';
+        return {
+          title: 'Acordes → Análisis',
+          description: 'Identifica progresiones y centros tonales',
+          icon: ArrowRightLeft,
+          color: 'from-green-500 to-green-600'
+        };
       case 'scale-mode':
-        return 'Escalas y Modos';
-      default:
-        return 'Seleccionar Grupo';
+        return {
+          title: 'Escalas y Modos',
+          description: 'Relaciona escalas con contextos armónicos',
+          icon: Scale,
+          color: 'from-purple-500 to-purple-600'
+        };
     }
   };
 
-  const getCategoryIcon = () => {
-    switch (selectedType) {
-      case 'progression-direct':
-        return <Music className="w-6 h-6" />;
-      case 'progression-inverse':
-        return <Users className="w-6 h-6" />;
-      case 'scale-mode':
-        return <BookOpen className="w-6 h-6" />;
-      default:
-        return <BookOpen className="w-6 h-6" />;
-    }
-  };
+  const typeInfo = getTypeInfo();
+  const TypeIcon = typeInfo.icon;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 p-4">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center mb-8">
-          <button
-            onClick={onBack}
-            className="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Volver
-          </button>
-        </div>
-
-        {/* Title */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            {getCategoryIcon()}
-            <h1 className="text-3xl font-bold text-gray-800">
-              {getCategoryTitle()}
-            </h1>
+    <div className="max-w-4xl mx-auto">
+      <div className="flex items-center gap-4 mb-8">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+        >
+          ← Volver
+        </button>
+        
+        <div className={`bg-gradient-to-r ${typeInfo.color} p-4 rounded-xl flex items-center gap-3`}>
+          <TypeIcon className="w-8 h-8 text-white" />
+          <div>
+            <h1 className="text-2xl font-bold text-white">{typeInfo.title}</h1>
+            <p className="text-blue-100">{typeInfo.description}</p>
           </div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Selecciona un grupo de preguntas para comenzar tu práctica
-          </p>
         </div>
+      </div>
 
-        {/* Groups Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredGroups.map((group) => (
-            <div
-              key={group.id}
-              onClick={() => onSelectGroup(group)}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 border border-gray-100"
-            >
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-semibold text-gray-800 leading-tight">
-                    {group.name}
-                  </h3>
-                  <span className="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">
+      <div className="grid gap-4">
+        {filteredGroups.map((group) => (
+          <button
+            key={group.id}
+            onClick={() => onSelectGroup(group)}
+            className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 text-left group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <BookOpen className="w-6 h-6 text-gray-600" />
+                  <h3 className="text-xl font-bold text-gray-800">{group.name}</h3>
+                  <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
                     {group.totalQuestions} preguntas
                   </span>
                 </div>
+                <p className="text-gray-600 mb-3">{group.description}</p>
                 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                  {group.description}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <BookOpen className="w-4 h-4" />
-                    <span>Nivel: Intermedio</span>
-                  </div>
-                  
-                  <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
-                    Comenzar
-                  </button>
+                <div className="flex items-center gap-4 text-sm text-gray-500">
+                  <span>📚 {group.totalQuestions} ejercicios</span>
+                  <span>🎯 Opción múltiple</span>
+                  <span>📊 Progreso visible</span>
                 </div>
               </div>
+              
+              <ChevronRight className="w-6 h-6 text-gray-400 group-hover:text-gray-600 transition-colors" />
             </div>
-          ))}
-        </div>
+          </button>
+        ))}
+      </div>
 
-        {/* Empty State */}
-        {filteredGroups.length === 0 && (
-          <div className="text-center py-12">
-            <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">
-              No hay grupos disponibles
-            </h3>
-            <p className="text-gray-500">
-              Los grupos para esta categoría están en desarrollo
-            </p>
-          </div>
-        )}
+      <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
+        <h3 className="text-lg font-semibold text-blue-800 mb-2">💡 Cómo funciona</h3>
+        <ul className="text-blue-700 space-y-1">
+          <li>• Cada grupo tiene {filteredGroups[0]?.totalQuestions || '10-15'} preguntas específicas del tema</li>
+          <li>• Las preguntas no se repiten hasta completar todo el grupo</li>
+          <li>• Puedes ver tu progreso y puntuación en tiempo real</li>
+          <li>• Todas las preguntas tienen explicaciones detalladas</li>
+        </ul>
       </div>
     </div>
   );
