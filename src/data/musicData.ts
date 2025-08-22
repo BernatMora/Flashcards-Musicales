@@ -278,6 +278,136 @@ export const progressions: Progression[] = [
     romanNumerals: ['I', 'V', 'vi', 'IV'],
     chords: ['G', 'D', 'Em', 'C'],
     name: 'Pop progression (I-V-vi-IV) in G'
+  },
+
+  // ARMONÍA AVANZADA - Intercambio modal
+  {
+    id: 'modal-interchange-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', 'bVImaj7', 'bVII7', 'Imaj7'],
+    chords: ['Cmaj7', 'Abmaj7', 'Bb7', 'Cmaj7'],
+    name: 'Modal interchange in C'
+  },
+  {
+    id: 'neapolitan-sixth-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', 'N6', 'V7', 'Imaj7'],
+    chords: ['Cmaj7', 'Db/F', 'G7', 'Cmaj7'],
+    name: 'Neapolitan sixth in C'
+  },
+  {
+    id: 'augmented-sixth-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', 'It+6', 'V7', 'Imaj7'],
+    chords: ['Cmaj7', 'Ab/F#', 'G7', 'Cmaj7'],
+    name: 'Italian augmented sixth in C'
+  },
+
+  // Dominantes secundarios múltiples
+  {
+    id: 'secondary-dominants-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', 'V7/vi', 'vim7', 'V7/ii', 'iim7', 'V7', 'Imaj7'],
+    chords: ['Cmaj7', 'E7', 'Am7', 'A7', 'Dm7', 'G7', 'Cmaj7'],
+    name: 'Multiple secondary dominants in C'
+  },
+  {
+    id: 'circle-of-fifths-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', 'V7/iii', 'iiim7', 'V7/vi', 'vim7', 'V7/ii', 'iim7', 'V7', 'Imaj7'],
+    chords: ['Cmaj7', 'B7', 'Em7', 'E7', 'Am7', 'A7', 'Dm7', 'G7', 'Cmaj7'],
+    name: 'Circle of fifths progression in C'
+  },
+
+  // Sustituciones avanzadas
+  {
+    id: 'tritone-substitution-chain-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', 'bII7', 'bV7', 'Imaj7'],
+    chords: ['Cmaj7', 'Db7', 'Gb7', 'Cmaj7'],
+    name: 'Tritone substitution chain in C'
+  },
+  {
+    id: 'chromatic-mediant-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', 'bIIImaj7', 'Imaj7'],
+    chords: ['Cmaj7', 'Ebmaj7', 'Cmaj7'],
+    name: 'Chromatic mediant in C'
+  },
+  {
+    id: 'common-tone-diminished-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', '#Io7', 'iim7', 'V7'],
+    chords: ['Cmaj7', 'C#o7', 'Dm7', 'G7'],
+    name: 'Common tone diminished in C'
+  },
+
+  // Progresiones politonales
+  {
+    id: 'bitonality-C-Gb',
+    key: 'C/Gb',
+    romanNumerals: ['Imaj7', 'bVmaj7', 'Imaj7'],
+    chords: ['Cmaj7', 'Gbmaj7', 'Cmaj7'],
+    name: 'Bitonal progression C/Gb'
+  },
+
+  // Armonía cuartal
+  {
+    id: 'quartal-harmony-C',
+    key: 'C',
+    romanNumerals: ['Isus4', 'IVsus4', 'bVIIsus4', 'Isus4'],
+    chords: ['Csus4', 'Fsus4', 'Bbsus4', 'Csus4'],
+    name: 'Quartal harmony in C'
+  },
+
+  // Upper structure triads
+  {
+    id: 'upper-structures-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', 'V7(#11)', 'Imaj7'],
+    chords: ['Cmaj7', 'G7/B', 'Cmaj7'],
+    name: 'Upper structure triads in C'
+  },
+
+  // Progresiones atonales/seriales
+  {
+    id: 'twelve-tone-row',
+    key: 'Atonal',
+    romanNumerals: ['P0', 'I5', 'R7', 'RI2'],
+    chords: ['C-Db-F-E', 'F-Gb-Bb-A', 'G-F#-D-Eb', 'Eb-D-G-F#'],
+    name: '12-tone row transformations'
+  },
+
+  // Armonía extendida de jazz
+  {
+    id: 'extended-jazz-C',
+    key: 'C',
+    romanNumerals: ['Imaj9#11', 'vim11', 'iim9', 'V13alt'],
+    chords: ['Cmaj9#11', 'Am11', 'Dm9', 'G13alt'],
+    name: 'Extended jazz harmony in C'
+  },
+  {
+    id: 'polychords-C',
+    key: 'C',
+    romanNumerals: ['Imaj7', 'D/G', 'Imaj7'],
+    chords: ['Cmaj7', 'D/G', 'Cmaj7'],
+    name: 'Polychords in C'
+  },
+
+  // Progresiones modales avanzadas
+  {
+    id: 'lydian-chromatic-concept',
+    key: 'C Lydian',
+    romanNumerals: ['Imaj7#11', 'IImaj7#11', 'Imaj7#11'],
+    chords: ['Cmaj7#11', 'Dmaj7#11', 'Cmaj7#11'],
+    name: 'Lydian Chromatic Concept'
+  },
+  {
+    id: 'symmetric-scales-progression',
+    key: 'C',
+    romanNumerals: ['C7alt', 'Db7alt', 'D7alt', 'Eb7alt'],
+    chords: ['C7alt', 'Db7alt', 'D7alt', 'Eb7alt'],
+    name: 'Symmetric diminished progression'
   }
 ];
 

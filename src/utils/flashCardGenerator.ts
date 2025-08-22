@@ -41,7 +41,10 @@ function generateWrongProgressionOptions(correctAnswer: string, isChordProgressi
         'Em7 - A7 - Dmaj7',
         'Fm7 - Bb7 - Ebmaj7',
         'Bm7 - E7 - Amaj7',
-        'Cm7 - F7 - Bbmaj7'
+        'Cm7 - F7 - Bbmaj7',
+        'Cmaj9#11 - Am11 - Dm9',
+        'G13alt - Cmaj7 - Abmaj7',
+        'Db7 - Gb7 - Cmaj7'
       ];
       const option = genericOptions[Math.floor(Math.random() * genericOptions.length)];
       if (!wrongOptions.includes(option) && option !== correctAnswer) {
@@ -53,7 +56,10 @@ function generateWrongProgressionOptions(correctAnswer: string, isChordProgressi
         'I-vi-IV-V en F',
         'vi-ii-V-I en D',
         'iii-VI-ii-V en A',
-        'I-VI-ii-V en Bb'
+        'I-VI-ii-V en Bb',
+        'I-bVI-bVII-I en C',
+        'V7/vi-vi-V7/ii-ii en G',
+        'Imaj7#11-IImaj7#11 en F Lidio'
       ];
       const option = genericOptions[Math.floor(Math.random() * genericOptions.length)];
       if (!wrongOptions.includes(option) && option !== correctAnswer) {
@@ -279,7 +285,7 @@ export function generateAdvancedProgressionCard(): FlashCard {
         question: `¿En qué tonalidad está esta progresión?\n${progression.chords.join(' - ')}`,
         answer: progression.key,
         options: keyOptions,
-        explanation: `Esta progresión está en ${progression.key}. Los acordes ${progression.chords.join(' - ')} corresponden a los grados ${progression.romanNumerals.join(' - ')} en esta tonalidad.`,
+        explanation: getDetailedProgressionExplanation(progression),
         data: progression
       };
     
@@ -301,6 +307,112 @@ export function generateAdvancedProgressionCard(): FlashCard {
         data: progression
       };
   }
+}
+
+function getDetailedProgressionExplanation(progression: any): string {
+  const { key, chords, romanNumerals, name } = progression;
+  
+  // Análisis específico para progresiones conocidas
+  if (name.includes('I-VI-ii-V')) {
+    return `Esta progresión está en ${key}. Análisis detallado:
+• ${chords[0]} = ${romanNumerals[0]} (tónica)
+• ${chords[1]} = V7/ii (dominante secundario del ii grado, no VI7 diatónico)
+• ${chords[2]} = ${romanNumerals[2]} (subdominante menor)
+• ${chords[3]} = ${romanNumerals[3]} (dominante principal)
+
+El segundo acorde es un dominante secundario que resuelve al ii grado.`;
+  }
+  
+  if (name.includes('iii-VI-ii-V')) {
+    return `Esta progresión está en ${key}. Análisis detallado:
+• ${chords[0]} = ${romanNumerals[0]} (mediante)
+• ${chords[1]} = V7/ii (dominante secundario del ii grado)
+• ${chords[2]} = ${romanNumerals[2]} (subdominante menor)
+• ${chords[3]} = ${romanNumerals[3]} (dominante principal)
+
+Esta es una variación del ii-V-I que comienza en el iii grado.`;
+  }
+  
+  if (name.includes('ii-bII-I')) {
+    return `Esta progresión está en ${key}. Análisis detallado:
+• ${chords[0]} = ${romanNumerals[0]} (subdominante menor)
+• ${chords[1]} = bII7 (sustitución tritónica del V7)
+• ${chords[2]} = ${romanNumerals[2]} (tónica)
+
+El segundo acorde es una sustitución tritónica del dominante (G7 → Db7).`;
+  }
+  
+  if (name.includes('I-bVII-IV-I')) {
+    return `Esta progresión está en ${key}. Análisis detallado:
+• ${chords[0]} = ${romanNumerals[0]} (tónica)
+• ${chords[1]} = bVII7 (dominante prestado del modo menor)
+• ${chords[2]} = ${romanNumerals[2]} (subdominante)
+• ${chords[3]} = ${romanNumerals[3]} (tónica)
+
+El bVII7 es un acorde prestado del modo menor paralelo.`;
+  }
+  
+  if (name.includes('Dorian vamp')) {
+    return `Esta progresión está en ${key}. Análisis modal:
+• ${chords[0]} = im7 (tónica menor)
+• ${chords[1]} = IVmaj7 (subdominante mayor)
+
+Típico vamp dórico donde el IV mayor caracteriza este modo.`;
+  }
+  
+  if (name.includes('Mixolydian vamp')) {
+    return `Esta progresión está en ${key}. Análisis modal:
+• ${chords[0]} = I7 (tónica dominante)
+• ${chords[1]} = bVIImaj7 (séptima menor característica del mixolidio)
+
+El bVII mayor es la nota característica del modo mixolidio.`;
+  }
+  
+  if (name.includes('Phrygian vamp')) {
+    return `Esta progresión está en ${key}. Análisis modal:
+• ${chords[0]} = im7 (tónica menor)
+• ${chords[1]} = bIImaj7 (segunda menor característica del frigio)
+
+El bII mayor es la nota característica del modo frigio.`;
+  }
+  
+  if (name.includes('blues')) {
+    return `Esta progresión está en ${key}. Análisis de blues:
+Los acordes siguen la estructura tradicional del blues de 12 compases con:
+• I7 (tónica dominante)
+• IV7 (subdominante dominante) 
+• V7 (dominante)
+${name.includes('Jazz') ? '\nCon sustituciones armónicas típicas del jazz.' : ''}`;
+  }
+  
+  // Explicación genérica mejorada
+  let explanation = `Esta progresión está en ${key}. Análisis armónico:\n`;
+  
+  chords.forEach((chord, index) => {
+    let roman = romanNumerals[index];
+    let function_name = '';
+    
+    // Identificar funciones armónicas
+    if (roman.includes('I') && !roman.includes('ii') && !roman.includes('iii') && !roman.includes('vi') && !roman.includes('VII')) {
+      function_name = '(tónica)';
+    } else if (roman.includes('ii')) {
+      function_name = '(subdominante menor)';
+    } else if (roman.includes('iii')) {
+      function_name = '(mediante)';
+    } else if (roman.includes('IV')) {
+      function_name = '(subdominante)';
+    } else if (roman.includes('V') && !roman.includes('bV')) {
+      function_name = '(dominante)';
+    } else if (roman.includes('vi')) {
+      function_name = '(superdominante/relativo menor)';
+    } else if (roman.includes('vii')) {
+      function_name = '(sensible)';
+    }
+    
+    explanation += `• ${chord} = ${roman} ${function_name}\n`;
+  });
+  
+  return explanation.trim();
 }
 
 export function generateFlashCard(
