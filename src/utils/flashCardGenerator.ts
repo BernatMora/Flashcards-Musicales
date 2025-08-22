@@ -304,6 +304,7 @@ export function generateAdvancedProgressionCard(): FlashCard {
         answer: firstRoman,
         options: romanOptions,
         explanation: `En la tonalidad de ${progression.key}, el acorde ${firstChord} cumple la función de ${firstRoman}. Forma parte de la progresión ${progression.romanNumerals.join(' - ')}.`,
+        explanation: generateDetailedProgressionExplanation(progression, 'analysis'),
         data: progression
       };
   }
