@@ -420,17 +420,7 @@ export function generateFlashCard(
   type: 'progression-direct' | 'progression-inverse' | 'scale-mode',
   selectedScaleIds?: string[]
 ): FlashCard {
-  // Añadir variedad usando diferentes generadores
-  const useAdvanced = Math.random() > 0.3; // 70% probabilidad de usar ejercicios avanzados
-  
-  switch (type) {
-    case 'progression-direct':
-      return useAdvanced ? generateAdvancedProgressionCard() : generateProgressionDirectCard();
-    case 'progression-inverse':
-      return useAdvanced ? generateAdvancedProgressionCard() : generateProgressionInverseCard();
-    case 'scale-mode':
-      return generateScaleModeCard(selectedScaleIds);
-    default:
-      return generateProgressionDirectCard();
-  }
+  // Esta función ya no se usa con el nuevo sistema de grupos
+  // Mantener solo para compatibilidad
+  return generateProgressionDirectCard();
 }

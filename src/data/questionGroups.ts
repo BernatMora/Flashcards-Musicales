@@ -311,7 +311,10 @@ const scaleModeGroups: QuestionGroup[] = [
     questions: [
       // Modo → Acorde (7 preguntas)
       ...scales.filter(s => ['c-major', 'd-dorian', 'e-phrygian', 'f-lydian', 'g-mixolydian', 'a-minor', 'b-locrian'].includes(s.id)).map((scale, index) => {
-        const allConnections = scales.filter(s => s.chordConnection).map(s => s.chordConnection!);
+        const allConnections = [
+          'Cmaj7 (I grado)', 'Dm7 (ii grado)', 'Em7 (iii grado)', 'Fmaj7 (IV grado)',
+          'G7 (V grado)', 'Am7 (vi grado)', 'Bm7b5 (vii grado)', 'C7#11', 'G7alt'
+        ];
         const wrongOptions = generateWrongOptions(scale.chordConnection!, allConnections);
         const options = shuffleOptions(scale.chordConnection!, wrongOptions);
         
@@ -354,7 +357,10 @@ const scaleModeGroups: QuestionGroup[] = [
     questions: [
       // Escalas bebop
       ...scales.filter(s => s.id.includes('bebop')).map((scale, index) => {
-        const allConnections = scales.filter(s => s.chordConnection).map(s => s.chordConnection!);
+        const allConnections = [
+          'Cmaj7 (bebop)', 'G7 (bebop)', 'Dm7 (bebop)', 'C7#11', 'G7alt',
+          'Am7 (vi grado)', 'Fmaj7 (IV grado)', 'Em7 (iii grado)'
+        ];
         const wrongOptions = generateWrongOptions(scale.chordConnection!, allConnections);
         const options = shuffleOptions(scale.chordConnection!, wrongOptions);
         
@@ -371,7 +377,10 @@ const scaleModeGroups: QuestionGroup[] = [
       
       // Escalas alteradas
       ...scales.filter(s => ['g-altered', 'c-lydian-dominant', 'a-phrygian-dominant'].includes(s.id)).map((scale, index) => {
-        const allScaleNames = scales.filter(s => s.name.includes('Alterada') || s.name.includes('Lidio') || s.name.includes('Frigio')).map(s => s.name);
+        const allScaleNames = [
+          'G Alterada (Super Locrio)', 'C Lidio Dominante', 'A Frigio Dominante',
+          'C Mayor (Jónico)', 'D Dórico', 'G Mixolidio', 'A Menor (Eólico)'
+        ];
         const wrongOptions = generateWrongOptions(scale.name, allScaleNames);
         const options = shuffleOptions(scale.name, wrongOptions);
         
@@ -405,7 +414,10 @@ const scaleModeGroups: QuestionGroup[] = [
       
       // Escalas étnicas
       ...scales.filter(s => ['c-hungarian-minor', 'c-japanese-hirajoshi', 'c-arabic-maqam'].includes(s.id)).map((scale, index) => {
-        const allScaleNames = scales.filter(s => s.name.includes('Húngara') || s.name.includes('Japonesa') || s.name.includes('Árabe')).map(s => s.name);
+        const allScaleNames = [
+          'C Húngara Menor', 'C Japonesa (Hirajoshi)', 'C Árabe (Hijaz)',
+          'C Mayor (Jónico)', 'A Menor (Eólico)', 'C Cromática'
+        ];
         const wrongOptions = generateWrongOptions(scale.name, allScaleNames);
         const options = shuffleOptions(scale.name, wrongOptions);
         

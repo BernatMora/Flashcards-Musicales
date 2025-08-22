@@ -31,9 +31,9 @@ function App() {
       return;
     }
     
-    // Para escalas sin configuración, usar el sistema anterior
+    // Para escalas sin configuración, mostrar selector de grupos
     setCurrentQuizSettings({ type });
-    setShowScaleSelector(false);
+    setShowGroupSelector(true);
   };
 
   const selectGroup = (group: QuestionGroup) => {
