@@ -49,4 +49,22 @@ export interface QuizSettings {
   type: 'progression-direct' | 'progression-inverse' | 'scale-mode';
   selectedCategories?: string[];
   selectedScales?: string[];
+  selectedGroup?: QuestionGroup;
+}
+
+export interface QuestionGroup {
+  id: string;
+  name: string;
+  description: string;
+  category: 'progression-direct' | 'progression-inverse' | 'scale-mode';
+  questions: FlashCard[];
+  totalQuestions: number;
+}
+
+export interface QuizProgress {
+  groupId: string;
+  completedQuestions: string[];
+  currentIndex: number;
+  score: { correct: number; total: number };
+  streak: number;
 }

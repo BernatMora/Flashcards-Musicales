@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import FlashCard from './components/FlashCard';
 import QuizSelector from './components/QuizSelector';
+import GroupSelector from './components/GroupSelector';
+import QuizProgress from './components/QuizProgress';
 import ScaleSelector from './components/ScaleSelector';
-import ScoreDisplay from './components/ScoreDisplay';
-import { FlashCard as FlashCardType, QuizResult, QuizSettings } from './types/music';
-import { generateFlashCard } from './utils/flashCardGenerator';
+import { FlashCard as FlashCardType, QuizResult, QuizSettings, QuestionGroup, QuizProgress as QuizProgressType } from './types/music';
 import { Home, RotateCcw } from 'lucide-react';
 
 function App() {
   const [currentQuizSettings, setCurrentQuizSettings] = useState<QuizSettings | null>(null);
+  const [selectedGroup, setSelectedGroup] = useState<QuestionGroup | null>(null);
+  const [quizProgress, setQuizProgress] = useState<QuizProgressType | null>(null);
   const [currentCard, setCurrentCard] = useState<FlashCardType | null>(null);
-  const [score, setScore] = useState({ correct: 0, total: 0 });
-  const [streak, setStreak] = useState(0);
+  const [showGroupSelector, setShowGroupSelector] = useState(false);
   const [showScaleSelector, setShowScaleSelector] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedScales, setSelectedScales] = useState<string[]>([]);
@@ -23,12 +24,33 @@ function App() {
       return;
     }
     
-    const settings: QuizSettings = { type };
-    setCurrentQuizSettings(settings);
-    setCurrentCard(generateFlashCard(type));
-    setScore({ correct: 0, total: 0 });
-    setStreak(0);
+    // Para progresiones, mostrar selector de grupos
+    if (type === 'progression-direct' || type === 'progression-inverse') {
+      setCurrentQuizSettings({ type });
+      setShowGroupSelector(true);
+      return;
+    }
+    
+    // Para escalas sin configuración, usar el sistema anterior
+    setCurrentQuizSettings({ type });
     setShowScaleSelector(false);
+  };
+
+  const selectGroup = (group: QuestionGroup) => {
+    setSelectedGroup(group);
+    setShowGroupSelector(false);
+    
+    // Inicializar progreso del quiz
+    const progress: QuizProgressType = {
+      groupId: group.id,
+      completedQuestions: [],
+      currentIndex: 0,
+      score: { correct: 0, total: 0 },
+      streak: 0
+    };
+    
+    setQuizProgress(progress);
+    setCurrentCard(group.questions[0]);
   };
 
   const startScaleQuiz = () => {
@@ -38,36 +60,97 @@ function App() {
         selectedScales
       };
       setCurrentQuizSettings(settings);
-      setCurrentCard(generateFlashCard(currentQuizSettings.type, selectedScales));
-      setScore({ correct: 0, total: 0 });
-      setStreak(0);
+      // Para escalas, mantener el sistema anterior por ahora
       setShowScaleSelector(false);
     }
   };
 
   const handleAnswer = (result: QuizResult) => {
-    setScore(prev => ({
-      correct: prev.correct + (result.correct ? 1 : 0),
-      total: prev.total + 1
-    }));
-
-    setStreak(prev => result.correct ? prev + 1 : 0);
+    if (!quizProgress || !selectedGroup) return;
+    
+    const newProgress = {
+      ...quizProgress,
+      completedQuestions: [...quizProgress.completedQuestions, currentCard!.id],
+      score: {
+        correct: quizProgress.score.correct + (result.correct ? 1 : 0),
+        total: quizProgress.score.total + 1
+      },
+      streak: result.correct ? quizProgress.streak + 1 : 0
+    };
+    
+    setQuizProgress(newProgress);
   };
 
   const handleNext = () => {
-    if (currentQuizSettings) {
-      setCurrentCard(generateFlashCard(
-        currentQuizSettings.type, 
-        currentQuizSettings.selectedScales
-      ));
+    if (!quizProgress || !selectedGroup) return;
+    
+    // Encontrar la siguiente pregunta no completada
+    const nextIndex = selectedGroup.questions.findIndex(
+      (q, index) => index > quizProgress.currentIndex && !quizProgress.completedQuestions.includes(q.id)
+    );
+    
+    if (nextIndex !== -1) {
+      const newProgress = {
+        ...quizProgress,
+        currentIndex: nextIndex
+      };
+      setQuizProgress(newProgress);
+      setCurrentCard(selectedGroup.questions[nextIndex]);
+    } else {
+      // Si no hay más preguntas, buscar cualquier pregunta no completada
+      const uncompletedIndex = selectedGroup.questions.findIndex(
+        q => !quizProgress.completedQuestions.includes(q.id)
+      );
+      
+      if (uncompletedIndex !== -1) {
+        const newProgress = {
+          ...quizProgress,
+          currentIndex: uncompletedIndex
+        };
+        setQuizProgress(newProgress);
+        setCurrentCard(selectedGroup.questions[uncompletedIndex]);
+      }
     }
   };
 
   const resetQuiz = () => {
     setCurrentQuizSettings(null);
+    setSelectedGroup(null);
+    setQuizProgress(null);
     setCurrentCard(null);
-    setScore({ correct: 0, total: 0 });
-    setStreak(0);
+    setShowGroupSelector(false);
+    setShowScaleSelector(false);
+    setSelectedCategories([]);
+    setSelectedScales([]);
+  };
+
+  const resetCurrentQuiz = () => {
+    if (selectedGroup) {
+      const progress: QuizProgressType = {
+        groupId: selectedGroup.id,
+        completedQuestions: [],
+        currentIndex: 0,
+        score: { correct: 0, total: 0 },
+        streak: 0
+      };
+      setQuizProgress(progress);
+      setCurrentCard(selectedGroup.questions[0]);
+    }
+  };
+
+  const backToGroupSelector = () => {
+    setSelectedGroup(null);
+    setQuizProgress(null);
+    setCurrentCard(null);
+    setShowGroupSelector(true);
+  };
+
+  const backToMainMenu = () => {
+    setCurrentQuizSettings(null);
+    setSelectedGroup(null);
+    setQuizProgress(null);
+    setCurrentCard(null);
+    setShowGroupSelector(false);
     setShowScaleSelector(false);
     setSelectedCategories([]);
     setSelectedScales([]);
@@ -76,13 +159,19 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <div className="container mx-auto px-4 py-8">
-        {!currentQuizSettings && !showScaleSelector ? (
+        {!currentQuizSettings && !showScaleSelector && !showGroupSelector ? (
           <QuizSelector onSelectQuiz={startQuiz} />
+        ) : showGroupSelector && currentQuizSettings ? (
+          <GroupSelector
+            selectedType={currentQuizSettings.type}
+            onSelectGroup={selectGroup}
+            onBack={backToMainMenu}
+          />
         ) : showScaleSelector ? (
           <>
             <div className="flex justify-start mb-6">
               <button
-                onClick={resetQuiz}
+                onClick={backToMainMenu}
                 className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
               >
                 <Home className="w-5 h-5" />
@@ -97,34 +186,36 @@ function App() {
               onStartQuiz={startScaleQuiz}
             />
           </>
-        ) : (
+        ) : selectedGroup && quizProgress ? (
           <>
             <div className="flex justify-between items-center mb-6">
               <button
-                onClick={resetQuiz}
+                onClick={backToGroupSelector}
                 className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
               >
-                <Home className="w-5 h-5" />
-                Volver al menú
+                ← Volver a grupos
               </button>
               
-              <button
-                onClick={() => {
-                  setScore({ correct: 0, total: 0 });
-                  setStreak(0);
-                }}
-                className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-              >
-                <RotateCcw className="w-5 h-5" />
-                Reiniciar
-              </button>
+              <div className="flex gap-3">
+                <button
+                  onClick={backToMainMenu}
+                  className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <Home className="w-5 h-5" />
+                  Menú principal
+                </button>
+                
+                <button
+                  onClick={resetCurrentQuiz}
+                  className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <RotateCcw className="w-5 h-5" />
+                  Reiniciar grupo
+                </button>
+              </div>
             </div>
 
-            <ScoreDisplay 
-              correct={score.correct} 
-              total={score.total} 
-              streak={streak} 
-            />
+            <QuizProgress progress={quizProgress} group={selectedGroup} />
 
             {currentCard && (
               <FlashCard
@@ -134,6 +225,10 @@ function App() {
               />
             )}
           </>
+        ) : (
+          <div className="text-center">
+            <p>Cargando...</p>
+          </div>
         )}
       </div>
     </div>
