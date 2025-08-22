@@ -1,15 +1,14 @@
 import { QuestionGroup, FlashCard } from '../types/music';
 import { progressions, scales } from './musicData';
 
-// Función para generar opciones incorrectas
+// Función auxiliar para generar opciones incorrectas
 function generateWrongOptions(correctAnswer: string, allOptions: string[], count: number = 2): string[] {
   const available = allOptions.filter(opt => opt !== correctAnswer);
   const wrong: string[] = [];
   
   while (wrong.length < count && available.length > 0) {
     const randomIndex = Math.floor(Math.random() * available.length);
-    wrong.push(available[randomIndex]);
-    available.splice(randomIndex, 1);
+    wrong.push(available.splice(randomIndex, 1)[0]);
   }
   
   return wrong;
@@ -204,6 +203,187 @@ const progressionDirectGroups: QuestionGroup[] = [
           data: { key, chords, romanNumerals: ['I', 'V7/iii', 'iii', 'V7/vi', 'vi', 'V7/ii', 'ii', 'V'] }
         };
       })
+    ]
+  }
+];
+
+// PROGRESIONES DE BLUES
+const bluesProgressionGroups: QuestionGroup[] = [
+  {
+    id: 'blues-progressions',
+    name: 'Progresiones de Blues',
+    description: 'Blues tradicional, jazz blues y blues menor en diferentes estilos',
+    category: 'progression-direct',
+    totalQuestions: 15,
+    questions: [
+      {
+        id: 'blues-c-basic',
+        type: 'progression-direct',
+        question: 'I7-I7-I7-I7-IV7-IV7-I7-I7-V7-IV7-I7-V7 (12-bar blues) en C',
+        answer: 'C7-C7-C7-C7-F7-F7-C7-C7-G7-F7-C7-G7',
+        options: shuffleOptions('C7-C7-C7-C7-F7-F7-C7-C7-G7-F7-C7-G7', [
+          'G7-G7-G7-G7-C7-C7-G7-G7-D7-C7-G7-D7',
+          'F7-F7-F7-F7-Bb7-Bb7-F7-F7-C7-Bb7-F7-C7'
+        ]),
+        explanation: 'Blues de 12 compases en C: estructura tradicional con I7 (C7) 4 compases, IV7 (F7) 2 compases, I7 2 compases, V7 (G7) 1 compás, IV7 1 compás, I7 1 compás, V7 1 compás (turnaround). Todos los acordes son dominantes, creando la tensión característica del blues.',
+        data: { key: 'C', type: 'traditional-blues' }
+      },
+      {
+        id: 'jazz-blues-c',
+        type: 'progression-direct',
+        question: 'I7-VI7-iim7-V7-IV7-IV7-I7-VI7-iim7-V7-I7-iim7-V7 (jazz blues) en C',
+        answer: 'C7-A7-Dm7-G7-F7-F7-C7-A7-Dm7-G7-C7-Dm7-G7',
+        options: shuffleOptions('C7-A7-Dm7-G7-F7-F7-C7-A7-Dm7-G7-C7-Dm7-G7', [
+          'F7-D7-Gm7-C7-Bb7-Bb7-F7-D7-Gm7-C7-F7-Gm7-C7',
+          'G7-E7-Am7-D7-C7-C7-G7-E7-Am7-D7-G7-Am7-D7'
+        ]),
+        explanation: 'Jazz blues en C: incorpora armonía sofisticada al blues tradicional. A7 (VI7) es V7/ii (dominante secundario), creando ii-V-I temporales. Los múltiples ii-V añaden movimiento armónico y sofisticación jazzística.',
+        data: { key: 'C', type: 'jazz-blues' }
+      },
+      {
+        id: 'minor-blues-am',
+        type: 'progression-direct',
+        question: 'im7-im7-im7-im7-ivm7-ivm7-im7-im7-V7-ivm7-im7-V7 (blues menor) en Am',
+        answer: 'Am7-Am7-Am7-Am7-Dm7-Dm7-Am7-Am7-E7-Dm7-Am7-E7',
+        options: shuffleOptions('Am7-Am7-Am7-Am7-Dm7-Dm7-Am7-Am7-E7-Dm7-Am7-E7', [
+          'Em7-Em7-Em7-Em7-Am7-Am7-Em7-Em7-B7-Am7-Em7-B7',
+          'Dm7-Dm7-Dm7-Dm7-Gm7-Gm7-Dm7-Dm7-A7-Gm7-Dm7-A7'
+        ]),
+        explanation: 'Blues menor en Am: Am7 (im7 - tónica menor), Dm7 (ivm7 - subdominante menor), E7 (V7 - dominante mayor). El contraste entre acordes menores y el dominante mayor crea la tensión característica del blues menor, más melancólico que el blues mayor.',
+        data: { key: 'Am', type: 'minor-blues' }
+      },
+      {
+        id: 'blues-g-shuffle',
+        type: 'progression-direct',
+        question: 'I7-I7-I7-I7-IV7-IV7-I7-I7-V7-IV7-I7-I7 (shuffle blues) en G',
+        answer: 'G7-G7-G7-G7-C7-C7-G7-G7-D7-C7-G7-G7',
+        options: shuffleOptions('G7-G7-G7-G7-C7-C7-G7-G7-D7-C7-G7-G7', [
+          'C7-C7-C7-C7-F7-F7-C7-C7-G7-F7-C7-C7',
+          'D7-D7-D7-D7-G7-G7-D7-D7-A7-G7-D7-D7'
+        ]),
+        explanation: 'Shuffle blues en G: similar al blues tradicional pero termina en I7-I7 en lugar del turnaround V7, creando una sensación más reposada. El "shuffle" se refiere al ritmo ternario característico (corchea con puntillo + semicorchea).',
+        data: { key: 'G', type: 'shuffle-blues' }
+      },
+      {
+        id: 'blues-f-extended',
+        type: 'progression-direct',
+        question: 'I7-VI7-iim7-V7-IV7-#IVo7-I7-VI7-iim7-V7-I7-V7 (blues extendido) en F',
+        answer: 'F7-D7-Gm7-C7-Bb7-Bo7-F7-D7-Gm7-C7-F7-C7',
+        options: shuffleOptions('F7-D7-Gm7-C7-Bb7-Bo7-F7-D7-Gm7-C7-F7-C7', [
+          'Bb7-G7-Cm7-F7-Eb7-Eo7-Bb7-G7-Cm7-F7-Bb7-F7',
+          'C7-A7-Dm7-G7-F7-F#o7-C7-A7-Dm7-G7-C7-G7'
+        ]),
+        explanation: 'Blues extendido en F con sustituciones jazz: D7 (VI7 = V7/ii), Gm7-C7 (ii-V), Bo7 (#IVo7 - disminuido cromático que conecta Bb7 con F7). Combina la estructura del blues con la sofisticación armónica del jazz.',
+        data: { key: 'F', type: 'extended-blues' }
+      },
+      {
+        id: 'blues-bb-bebop',
+        type: 'progression-direct',
+        question: 'I7-VI7-iim7-V7-iiim7-VI7-iim7-V7-I7-VI7-iim7-V7 (bebop blues) en Bb',
+        answer: 'Bb7-G7-Cm7-F7-Dm7-G7-Cm7-F7-Bb7-G7-Cm7-F7',
+        options: shuffleOptions('Bb7-G7-Cm7-F7-Dm7-G7-Cm7-F7-Bb7-G7-Cm7-F7', [
+          'F7-D7-Gm7-C7-Am7-D7-Gm7-C7-F7-D7-Gm7-C7',
+          'Eb7-C7-Fm7-Bb7-Gm7-C7-Fm7-Bb7-Eb7-C7-Fm7-Bb7'
+        ]),
+        explanation: 'Bebop blues en Bb: incorpora múltiples ii-V-I y dominantes secundarios. Dm7 (iiim7) añade color armónico. El movimiento armónico constante y las sustituciones son características del bebop, creando líneas de bajo que se mueven cromáticamente.',
+        data: { key: 'Bb', type: 'bebop-blues' }
+      },
+      {
+        id: 'blues-e-country',
+        type: 'progression-direct',
+        question: 'I-I-I-I-IV-IV-I-I-V-IV-I-V (country blues) en E',
+        answer: 'E-E-E-E-A-A-E-E-B-A-E-B',
+        options: shuffleOptions('E-E-E-E-A-A-E-E-B-A-E-B', [
+          'A-A-A-A-D-D-A-A-E-D-A-E',
+          'G-G-G-G-C-C-G-G-D-C-G-D'
+        ]),
+        explanation: 'Country blues en E con tríadas simples: E (I), A (IV), B (V). A diferencia del blues tradicional que usa acordes dominantes (7ª), el country blues usa tríadas mayores, creando un sonido más directo, folk y menos sofisticado armónicamente.',
+        data: { key: 'E', type: 'country-blues' }
+      },
+      {
+        id: 'blues-a-chicago',
+        type: 'progression-direct',
+        question: 'I7-IV7-I7-I7-IV7-IV7-I7-VI7-iim7-V7-I7-V7 (Chicago blues) en A',
+        answer: 'A7-D7-A7-A7-D7-D7-A7-F#7-Bm7-E7-A7-E7',
+        options: shuffleOptions('A7-D7-A7-A7-D7-D7-A7-F#7-Bm7-E7-A7-E7', [
+          'D7-G7-D7-D7-G7-G7-D7-B7-Em7-A7-D7-A7',
+          'E7-A7-E7-E7-A7-A7-E7-C#7-F#m7-B7-E7-B7'
+        ]),
+        explanation: 'Chicago blues en A: combina elementos del blues tradicional con influencias jazz. F#7 (VI7 = V7/ii) es un dominante secundario, Bm7-E7 (ii-V) añade sofisticación. El estilo Chicago incorporó instrumentos eléctricos y armonía más compleja.',
+        data: { key: 'A', type: 'chicago-blues' }
+      },
+      {
+        id: 'blues-d-minor-extended',
+        type: 'progression-direct',
+        question: 'im7-im7-im7-im7-ivm7-ivm7-im7-im7-V7-ivm7-im7-V7 (blues menor extendido) en Dm',
+        answer: 'Dm7-Dm7-Dm7-Dm7-Gm7-Gm7-Dm7-Dm7-A7-Gm7-Dm7-A7',
+        options: shuffleOptions('Dm7-Dm7-Dm7-Dm7-Gm7-Gm7-Dm7-Dm7-A7-Gm7-Dm7-A7', [
+          'Am7-Am7-Am7-Am7-Dm7-Dm7-Am7-Am7-E7-Dm7-Am7-E7',
+          'Em7-Em7-Em7-Em7-Am7-Am7-Em7-Em7-B7-Am7-Em7-B7'
+        ]),
+        explanation: 'Blues menor extendido en Dm: mantiene la estructura de 12 compases pero con acordes menores. Dm7 (im7), Gm7 (ivm7), A7 (V7). El A7 puede incluir b9 (Bb) para crear el sonido flamenco. Más melancólico que el blues mayor.',
+        data: { key: 'Dm', type: 'minor-blues-extended' }
+      },
+      {
+        id: 'blues-c-modern',
+        type: 'progression-direct',
+        question: 'I7-bII7-I7-I7-IV7-bV7-I7-VI7-iim7-bII7-I7-bII7 (blues moderno) en C',
+        answer: 'C7-Db7-C7-C7-F7-Gb7-C7-A7-Dm7-Db7-C7-Db7',
+        options: shuffleOptions('C7-Db7-C7-C7-F7-Gb7-C7-A7-Dm7-Db7-C7-Db7', [
+          'F7-Gb7-F7-F7-Bb7-B7-F7-D7-Gm7-Gb7-F7-Gb7',
+          'G7-Ab7-G7-G7-C7-Db7-G7-E7-Am7-Ab7-G7-Ab7'
+        ]),
+        explanation: 'Blues moderno en C con sustituciones tritónicas: Db7 (bII7 = sustituto de G7), Gb7 (bV7 = sustituto de C7). Las sustituciones tritónicas crean movimiento cromático en el bajo y sofisticación armónica típica del jazz moderno y fusion.',
+        data: { key: 'C', type: 'modern-blues' }
+      },
+      {
+        id: 'blues-g-texas',
+        type: 'progression-direct',
+        question: 'I7-I7-I7-I7-IV7-IV7-I7-I7-V7-V7-I7-I7 (Texas blues) en G',
+        answer: 'G7-G7-G7-G7-C7-C7-G7-G7-D7-D7-G7-G7',
+        options: shuffleOptions('G7-G7-G7-G7-C7-C7-G7-G7-D7-D7-G7-G7', [
+          'C7-C7-C7-C7-F7-F7-C7-C7-G7-G7-C7-C7',
+          'D7-D7-D7-D7-G7-G7-D7-D7-A7-A7-D7-D7'
+        ]),
+        explanation: 'Texas blues en G: variación del blues tradicional con V7-V7 en compases 9-10 (en lugar de V7-IV7) y final I7-I7 sin turnaround. Crea una sensación más reposada y es característico del estilo Texas con guitarras eléctricas y ritmo shuffle.',
+        data: { key: 'G', type: 'texas-blues' }
+      },
+      {
+        id: 'blues-f-swing',
+        type: 'progression-direct',
+        question: 'I7-I7-I7-I7-IV7-#IVo7-I7-I7-iim7-V7-I7-iim7-V7 (swing blues) en F',
+        answer: 'F7-F7-F7-F7-Bb7-Bo7-F7-F7-Gm7-C7-F7-Gm7-C7',
+        options: shuffleOptions('F7-F7-F7-F7-Bb7-Bo7-F7-F7-Gm7-C7-F7-Gm7-C7', [
+          'Bb7-Bb7-Bb7-Bb7-Eb7-Eo7-Bb7-Bb7-Cm7-F7-Bb7-Cm7-F7',
+          'C7-C7-C7-C7-F7-F#o7-C7-C7-Dm7-G7-C7-Dm7-G7'
+        ]),
+        explanation: 'Swing blues en F: incorpora Bo7 (#IVo7 - disminuido cromático) que conecta Bb7 con F7, y doble ii-V (Gm7-C7) al final para crear momentum. Típico del swing de los años 30-40, combina blues con sofisticación big band.',
+        data: { key: 'F', type: 'swing-blues' }
+      },
+      {
+        id: 'blues-eb-minor-modal',
+        type: 'progression-direct',
+        question: 'im7-bVII7-IV7-im7 (blues menor modal) en Em',
+        answer: 'Em7-D7-A7-Em7',
+        options: shuffleOptions('Em7-D7-A7-Em7', [
+          'Am7-G7-D7-Am7',
+          'Bm7-A7-E7-Bm7'
+        ]),
+        explanation: 'Blues menor modal en Em: Em7 (im7), D7 (bVII7 - acorde prestado del modo menor), A7 (IV7 - del mixolidio). Combina elementos del blues con modalidad, creando un sonido más moderno y abierto, común en rock progresivo y jazz fusion.',
+        data: { key: 'Em', type: 'modal-minor-blues' }
+      },
+      {
+        id: 'blues-ab-jazz-minor',
+        type: 'progression-direct',
+        question: 'im(maj7)-ivm7-V7alt-im(maj7) (jazz blues menor) en Am',
+        answer: 'Am(maj7)-Dm7-E7alt-Am(maj7)',
+        options: shuffleOptions('Am(maj7)-Dm7-E7alt-Am(maj7)', [
+          'Em(maj7)-Am7-B7alt-Em(maj7)',
+          'Dm(maj7)-Gm7-A7alt-Dm(maj7)'
+        ]),
+        explanation: 'Jazz blues menor en Am: Am(maj7) (im(maj7) - tónica menor con séptima mayor), Dm7 (ivm7), E7alt (V7alt - dominante alterado con b9, #9, #11, b13). El acorde menor con séptima mayor y el dominante alterado crean sofisticación jazzística moderna.',
+        data: { key: 'Am', type: 'jazz-minor-blues' }
+      }
     ]
   }
 ];
@@ -1109,6 +1289,7 @@ function getEthnicScaleExplanation(scaleName: string): string {
 
 export const questionGroups: QuestionGroup[] = [
   ...progressionDirectGroups,
+  ...bluesProgressionGroups,
   ...progressionInverseGroups,
   ...scaleModeGroups,
   // Añadir todos los nuevos grupos
