@@ -208,263 +208,6 @@ const progressionDirectGroups: QuestionGroup[] = [
   }
 ];
 
-// PROGRESIONES INVERSAS (Acordes → Análisis)
-const progressionInverseGroups: QuestionGroup[] = [
-  {
-    id: 'identify-ii-V-I',
-    name: 'Identificar ii-V-I',
-    description: 'Reconocer progresiones ii-V-I y su tonalidad',
-    category: 'progression-inverse',
-    totalQuestions: 15,
-    questions: [
-      {
-        id: 'identify-ii-V-I-C',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nDm7 - G7 - Cmaj7',
-        answer: 'ii-V-I en C',
-        options: shuffleOptions('ii-V-I en C', ['vi-ii-V en G', 'iii-VI-ii en F']),
-        explanation: 'Dm7-G7-Cmaj7 es un ii-V-I en C mayor. Dm7 es el ii grado (subdominante menor), G7 es el V grado (dominante), Cmaj7 es el I grado (tónica). Esta progresión fundamental del jazz crea movimiento por quintas descendentes (D→G→C).',
-        data: { key: 'C', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-F',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nGm7 - C7 - Fmaj7',
-        answer: 'ii-V-I en F',
-        options: shuffleOptions('ii-V-I en F', ['ii-V-I en Bb', 'vi-ii-V en C']),
-        explanation: 'Gm7-C7-Fmaj7 es un ii-V-I en F mayor. El análisis funcional: Gm7 (ii - subdominante menor), C7 (V - dominante), Fmaj7 (I - tónica). F mayor es muy común en jazz por su comodidad para instrumentos de viento.',
-        data: { key: 'F', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-Bb',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nCm7 - F7 - Bbmaj7',
-        answer: 'ii-V-I en Bb',
-        options: shuffleOptions('ii-V-I en Bb', ['ii-V-I en Eb', 'iii-VI-ii en F']),
-        explanation: 'Cm7-F7-Bbmaj7 es un ii-V-I en Bb mayor. Cm7 (ii grado), F7 (V grado), Bbmaj7 (I grado). Bb mayor es una tonalidad favorita en jazz, especialmente para saxofones y trompetas, por su sonoridad cálida y facilidad técnica.',
-        data: { key: 'Bb', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-Eb',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nFm7 - Bb7 - Ebmaj7',
-        answer: 'ii-V-I en Eb',
-        options: shuffleOptions('ii-V-I en Eb', ['ii-V-I en Ab', 'vi-ii-V en Bb']),
-        explanation: 'Fm7-Bb7-Ebmaj7 es un ii-V-I en Eb mayor. Eb mayor (3 bemoles) es común en jazz y música clásica. El movimiento armónico Fm7→Bb7→Ebmaj7 crea la resolución característica del ii-V-I con quintas descendentes.',
-        data: { key: 'Eb', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-Ab',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nBbm7 - Eb7 - Abmaj7',
-        answer: 'ii-V-I en Ab',
-        options: shuffleOptions('ii-V-I en Ab', ['ii-V-I en Db', 'iii-VI-ii en Eb']),
-        explanation: 'Bbm7-Eb7-Abmaj7 es un ii-V-I en Ab mayor. Ab mayor (4 bemoles) aparece en baladas de jazz y música romántica. Esta tonalidad tiene una sonoridad particularmente cálida y expresiva, favorita de compositores como Chopin.',
-        data: { key: 'Ab', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-Db',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nEbm7 - Ab7 - Dbmaj7',
-        answer: 'ii-V-I en Db',
-        options: shuffleOptions('ii-V-I en Db', ['ii-V-I en Gb', 'vi-ii-V en Ab']),
-        explanation: 'Ebm7-Ab7-Dbmaj7 es un ii-V-I en Db mayor. Db mayor (5 bemoles) es menos común pero aparece en standards como "Body and Soul". Su sonoridad es muy rica y expresiva, típica de baladas sofisticadas.',
-        data: { key: 'Db', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-G',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nAm7 - D7 - Gmaj7',
-        answer: 'ii-V-I en G',
-        options: shuffleOptions('ii-V-I en G', ['ii-V-I en D', 'vi-ii-V en D']),
-        explanation: 'Am7-D7-Gmaj7 es un ii-V-I en G mayor. G mayor es fundamental en jazz y música popular. Su sonoridad brillante y la facilidad de ejecución en guitarra la han convertido en una de las tonalidades más usadas en música occidental.',
-        data: { key: 'G', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-D',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nEm7 - A7 - Dmaj7',
-        answer: 'ii-V-I en D',
-        options: shuffleOptions('ii-V-I en D', ['ii-V-I en A', 'iii-VI-ii en A']),
-        explanation: 'Em7-A7-Dmaj7 es un ii-V-I en D mayor. D mayor es excelente para instrumentos de cuerda y aparece frecuentemente en música clásica y folk. Su sonoridad clara y brillante la hace ideal para música alegre y optimista.',
-        data: { key: 'D', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-A',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nBm7 - E7 - Amaj7',
-        answer: 'ii-V-I en A',
-        options: shuffleOptions('ii-V-I en A', ['ii-V-I en E', 'vi-ii-V en E']),
-        explanation: 'Bm7-E7-Amaj7 es un ii-V-I en A mayor. A mayor es muy cómoda para guitarra y piano, común en jazz y música popular. Su sonoridad natural y accesible la convierte en una tonalidad favorita para músicos de todos los niveles.',
-        data: { key: 'A', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-E',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nF#m7 - B7 - Emaj7',
-        answer: 'ii-V-I en E',
-        options: shuffleOptions('ii-V-I en E', ['ii-V-I en B', 'iii-VI-ii en B']),
-        explanation: 'F#m7-B7-Emaj7 es un ii-V-I en E mayor. E mayor es natural para guitarra y aparece en muchos standards de jazz. Su sonoridad abierta y resonante la hace ideal para música que busca un carácter brillante y energético.',
-        data: { key: 'E', progression: 'ii-V-I' }
-      },
-      {
-        id: 'identify-ii-V-I-minor-Am',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nBm7b5 - E7 - Am7',
-        answer: 'ii-V-i en Am',
-        options: shuffleOptions('ii-V-i en Am', ['ii-V-I en C', 'iii-VI-ii en C']),
-        explanation: 'Bm7b5-E7-Am7 es un ii-V-i en A menor. Bm7b5 (ii grado con quinta disminuida), E7 (V dominante), Am7 (i menor). El contraste entre el dominante mayor y la resolución menor crea la tensión característica de las progresiones menores.',
-        data: { key: 'Am', progression: 'ii-V-i minor' }
-      },
-      {
-        id: 'identify-ii-V-I-minor-Dm',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nEm7b5 - A7 - Dm7',
-        answer: 'ii-V-i en Dm',
-        options: shuffleOptions('ii-V-i en Dm', ['ii-V-I en F', 'vi-ii-V en F']),
-        explanation: 'Em7b5-A7-Dm7 es un ii-V-i en D menor. D menor es muy expresiva y melancólica. El A7 puede incluir b9 (Bb) para mayor tensión, creando el sonido flamenco característico. Esta progresión es común en bossa nova y jazz latino.',
-        data: { key: 'Dm', progression: 'ii-V-i minor' }
-      },
-      {
-        id: 'identify-ii-V-I-minor-Em',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nF#m7b5 - B7 - Em7',
-        answer: 'ii-V-i en Em',
-        options: shuffleOptions('ii-V-i en Em', ['ii-V-I en G', 'iii-VI-ii en G']),
-        explanation: 'F#m7b5-B7-Em7 es un ii-V-i en E menor. E menor es muy natural para guitarra y aparece frecuentemente en bossa nova y jazz. Su sonoridad melancólica pero accesible la convierte en una tonalidad favorita para baladas menores.',
-        data: { key: 'Em', progression: 'ii-V-i minor' }
-      },
-      {
-        id: 'identify-ii-V-I-minor-Gm',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nAm7b5 - D7 - Gm7',
-        answer: 'ii-V-i en Gm',
-        options: shuffleOptions('ii-V-i en Gm', ['ii-V-I en Bb', 'vi-ii-V en Bb']),
-        explanation: 'Am7b5-D7-Gm7 es un ii-V-i en G menor. G menor tiene una sonoridad particularmente dramática y expresiva. Mozart la llamó la tonalidad más patética, y es común en música clásica y jazz para expresar emociones profundas.',
-        data: { key: 'Gm', progression: 'ii-V-i minor' }
-      }
-    ]
-  },
-
-  {
-    id: 'identify-tonal-centers',
-    name: 'Identificar Centros Tonales',
-    description: 'Reconocer la tonalidad en progresiones complejas',
-    category: 'progression-inverse',
-    totalQuestions: 12,
-    questions: [
-      {
-        id: 'identify-center-complex-1',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad está esta progresión?\nCmaj7 - A7 - Dm7 - G7',
-        answer: 'C mayor',
-        options: shuffleOptions('C mayor', ['F mayor', 'G mayor']),
-        explanation: 'Esta progresión está en C mayor. Análisis: Cmaj7 (I), A7 (VI7 = V7/ii - dominante secundario), Dm7 (ii), G7 (V). El A7 es un dominante secundario que resuelve temporalmente al ii grado, pero el centro tonal permanece en C mayor.',
-        data: { key: 'C', complexity: 'secondary-dominants' }
-      },
-      {
-        id: 'identify-center-complex-2',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad está esta progresión?\nFmaj7 - D7 - Gm7 - C7',
-        answer: 'F mayor',
-        options: shuffleOptions('F mayor', ['Bb mayor', 'C mayor']),
-        explanation: 'Esta progresión está en F mayor. Análisis: Fmaj7 (I), D7 (VI7 = V7/ii), Gm7 (ii), C7 (V). Aunque contiene un dominante secundario (D7), el centro tonal es claramente F mayor, con una progresión I-VI7-ii-V típica del jazz.',
-        data: { key: 'F', complexity: 'secondary-dominants' }
-      },
-      {
-        id: 'identify-center-complex-3',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad está esta progresión?\nGmaj7 - E7 - Am7 - D7',
-        answer: 'G mayor',
-        options: shuffleOptions('G mayor', ['C mayor', 'D mayor']),
-        explanation: 'Esta progresión está en G mayor. Análisis: Gmaj7 (I), E7 (VI7 = V7/ii), Am7 (ii), D7 (V). El E7 es dominante secundario del ii grado (Am7). La progresión establece claramente G como centro tonal con la típica secuencia I-VI7-ii-V.',
-        data: { key: 'G', complexity: 'secondary-dominants' }
-      },
-      {
-        id: 'identify-center-modal-1',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad/modo está esta progresión?\nDm7 - Gmaj7 - Dm7 - Gmaj7',
-        answer: 'D Dórico',
-        options: shuffleOptions('D Dórico', ['G mayor', 'D menor natural']),
-        explanation: 'Esta progresión está en D Dórico. Dm7 (im7), Gmaj7 (IVmaj7). El IV mayor (Gmaj7) es la característica distintiva del modo dórico, diferenciándolo del menor natural que tendría Gm7. El vamp im7-IVmaj7 es típicamente dórico.',
-        data: { mode: 'D Dorian', complexity: 'modal' }
-      },
-      {
-        id: 'identify-center-modal-2',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad/modo está esta progresión?\nG7 - Fmaj7 - G7 - Fmaj7',
-        answer: 'G Mixolidio',
-        options: shuffleOptions('G Mixolidio', ['F mayor', 'C mayor']),
-        explanation: 'Esta progresión está en G Mixolidio. G7 (I7), Fmaj7 (bVIImaj7). El bVII mayor (Fmaj7) es la nota característica del modo mixolidio. El vamp I7-bVIImaj7 establece claramente el centro modal en G mixolidio.',
-        data: { mode: 'G Mixolydian', complexity: 'modal' }
-      },
-      {
-        id: 'identify-center-modal-3',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad/modo está esta progresión?\nEm7 - Fmaj7 - Em7 - Fmaj7',
-        answer: 'E Frigio',
-        options: shuffleOptions('E Frigio', ['F mayor', 'E menor natural']),
-        explanation: 'Esta progresión está en E Frigio. Em7 (im7), Fmaj7 (bIImaj7). El bII mayor (Fmaj7) es la característica distintiva del modo frigio. El semitono entre E y F crea la tensión típica frigia, común en música española y flamenca.',
-        data: { mode: 'E Phrygian', complexity: 'modal' }
-      },
-      {
-        id: 'identify-center-blues-1',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad está este blues?\nC7 - F7 - C7 - G7',
-        answer: 'C mayor (blues)',
-        options: shuffleOptions('C mayor (blues)', ['F mayor', 'G mayor']),
-        explanation: 'Este es un blues en C mayor. C7 (I7), F7 (IV7), C7 (I7), G7 (V7). La estructura I7-IV7-I7-V7 es típica del blues, donde todos los acordes son dominantes. C es claramente el centro tonal establecido por la progresión blues tradicional.',
-        data: { key: 'C', style: 'blues' }
-      },
-      {
-        id: 'identify-center-blues-2',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad está este blues menor?\nAm7 - Dm7 - Am7 - E7',
-        answer: 'A menor (blues)',
-        options: shuffleOptions('A menor (blues)', ['D menor', 'E mayor']),
-        explanation: 'Este es un blues menor en A menor. Am7 (im7), Dm7 (ivm7), Am7 (im7), E7 (V7). La estructura im7-ivm7-im7-V7 es típica del blues menor, donde el contraste entre acordes menores y el dominante mayor crea la tensión característica.',
-        data: { key: 'Am', style: 'minor-blues' }
-      },
-      {
-        id: 'identify-center-substitution-1',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad está esta progresión con sustitución?\nDm7 - Db7 - Cmaj7',
-        answer: 'C mayor',
-        options: shuffleOptions('C mayor', ['Db mayor', 'F mayor']),
-        explanation: 'Esta progresión está en C mayor con sustitución tritónica. Dm7 (ii), Db7 (bII7 - sustituto de G7), Cmaj7 (I). El Db7 es una sustitución tritónica del G7 original, creando movimiento cromático en el bajo pero manteniendo C como centro tonal.',
-        data: { key: 'C', complexity: 'tritone-substitution' }
-      },
-      {
-        id: 'identify-center-substitution-2',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad está esta progresión con sustituciones?\nFmaj7 - B7 - Bbmaj7 - Fmaj7',
-        answer: 'F mayor',
-        options: shuffleOptions('F mayor', ['Bb mayor', 'B mayor']),
-        explanation: 'Esta progresión está en F mayor con sustituciones. Fmaj7 (I), B7 (bV7 - sustituto tritónico), Bbmaj7 (IV), Fmaj7 (I). El B7 sustituye al F7, creando una progresión I-bV7-IV-I con movimiento cromático pero centro tonal en F.',
-        data: { key: 'F', complexity: 'tritone-substitution' }
-      },
-      {
-        id: 'identify-center-interchange-1',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad está esta progresión con intercambio modal?\nCmaj7 - Abmaj7 - Bb7 - Cmaj7',
-        answer: 'C mayor',
-        options: shuffleOptions('C mayor', ['Ab mayor', 'Bb mayor']),
-        explanation: 'Esta progresión está en C mayor con intercambio modal. Cmaj7 (I), Abmaj7 (bVI - prestado de Cm), Bb7 (bVII - prestado de Cm), Cmaj7 (I). Los acordes prestados del modo menor paralelo añaden color pero mantienen C como centro tonal.',
-        data: { key: 'C', complexity: 'modal-interchange' }
-      },
-      {
-        id: 'identify-center-interchange-2',
-        type: 'progression-inverse',
-        question: '¿En qué tonalidad está esta progresión con intercambio modal?\nGmaj7 - Ebmaj7 - F7 - Gmaj7',
-        answer: 'G mayor',
-        options: shuffleOptions('G mayor', ['Eb mayor', 'F mayor']),
-        explanation: 'Esta progresión está en G mayor con intercambio modal. Gmaj7 (I), Ebmaj7 (bVI - prestado de Gm), F7 (bVII - prestado de Gm), Gmaj7 (I). El intercambio modal con el menor paralelo enriquece la armonía pero G permanece como centro tonal.',
-        data: { key: 'G', complexity: 'modal-interchange' }
-      }
-    ]
-  }
-];
-
 // GRUPOS DE PROGRESIONES INVERSAS (Acordes → Análisis)
 const progressionInverseGroups: QuestionGroup[] = [
   {
@@ -553,6 +296,345 @@ const progressionInverseGroups: QuestionGroup[] = [
           data: { key, chords, romanNumerals: ['I', 'V7/ii', 'ii', 'V', 'iii', 'vi'] }
         };
       })
+    ]
+  }
+];
+
+// MÁS GRUPOS DE PROGRESIONES INVERSAS
+const moreProgressionInverseGroups: QuestionGroup[] = [
+  {
+    id: 'identify-blues-progressions',
+    name: 'Identificar Progresiones de Blues',
+    description: 'Reconocer diferentes tipos de blues y sus variaciones',
+    category: 'progression-inverse',
+    totalQuestions: 12,
+    questions: [
+      {
+        id: 'identify-traditional-blues-c',
+        type: 'progression-inverse',
+        question: '¿Qué tipo de progresión representan estos acordes?\nC7 - F7 - C7 - G7 - F7 - C7',
+        answer: 'Blues tradicional en C',
+        options: shuffleOptions('Blues tradicional en C', ['Jazz blues en C', 'Rock progression en C']),
+        explanation: 'C7-F7-C7-G7-F7-C7 es un blues tradicional en C. Estructura típica: I7-IV7-I7-V7-IV7-I7. Todos los acordes son dominantes, característica fundamental del blues que crea la tensión y el color típico del género.',
+        data: { key: 'C', style: 'traditional-blues' }
+      },
+      {
+        id: 'identify-jazz-blues-f',
+        type: 'progression-inverse',
+        question: '¿Qué tipo de progresión representan estos acordes?\nF7 - D7 - Gm7 - C7 - Bb7 - F7',
+        answer: 'Jazz blues en F',
+        options: shuffleOptions('Jazz blues en F', ['Blues tradicional en F', 'ii-V-I en F']),
+        explanation: 'F7-D7-Gm7-C7-Bb7-F7 es un jazz blues en F. Incorpora D7 (VI7 = V7/ii - dominante secundario) y Gm7-C7 (ii-V), añadiendo sofisticación armónica al blues tradicional.',
+        data: { key: 'F', style: 'jazz-blues' }
+      },
+      {
+        id: 'identify-minor-blues-am',
+        type: 'progression-inverse',
+        question: '¿Qué tipo de progresión representan estos acordes?\nAm7 - Dm7 - Am7 - E7',
+        answer: 'Blues menor en Am',
+        options: shuffleOptions('Blues menor en Am', ['ii-V-I en C', 'Progresión modal']),
+        explanation: 'Am7-Dm7-Am7-E7 es un blues menor en Am. Estructura im7-ivm7-im7-V7. El contraste entre acordes menores (Am7, Dm7) y el dominante mayor (E7) crea la tensión característica del blues menor.',
+        data: { key: 'Am', style: 'minor-blues' }
+      },
+      {
+        id: 'identify-chicago-blues-g',
+        type: 'progression-inverse',
+        question: '¿Qué estilo de blues representan estos acordes?\nG7 - C7 - G7 - E7 - Am7 - D7',
+        answer: 'Chicago blues en G',
+        options: shuffleOptions('Chicago blues en G', ['Blues tradicional en G', 'Jazz blues en G']),
+        explanation: 'G7-C7-G7-E7-Am7-D7 es Chicago blues en G. Incorpora E7 (VI7 = V7/ii) y Am7-D7 (ii-V), combinando elementos del blues tradicional con influencias jazz. Típico del estilo Chicago con instrumentos eléctricos.',
+        data: { key: 'G', style: 'chicago-blues' }
+      },
+      {
+        id: 'identify-bebop-blues-bb',
+        type: 'progression-inverse',
+        question: '¿Qué estilo avanzado representan estos acordes?\nBb7 - G7 - Cm7 - F7 - Dm7 - G7 - Cm7 - F7',
+        answer: 'Bebop blues en Bb',
+        options: shuffleOptions('Bebop blues en Bb', ['Jazz blues en Bb', 'Blues tradicional en Bb']),
+        explanation: 'Esta progresión es bebop blues en Bb. Incorpora múltiples ii-V-I (Cm7-F7), dominantes secundarios (G7) y movimiento armónico constante. El Dm7 (iiim7) añade color típico del bebop.',
+        data: { key: 'Bb', style: 'bebop-blues' }
+      },
+      {
+        id: 'identify-country-blues-e',
+        type: 'progression-inverse',
+        question: '¿Qué estilo de blues representan estos acordes?\nE - A - E - B - A - E',
+        answer: 'Country blues en E',
+        options: shuffleOptions('Country blues en E', ['Blues tradicional en E', 'Rock progression en E']),
+        explanation: 'E-A-E-B-A-E es country blues en E. Usa tríadas simples (E, A, B) en lugar de acordes dominantes (E7, A7, B7). Crea un sonido más directo y folk, típico del country blues y música americana tradicional.',
+        data: { key: 'E', style: 'country-blues' }
+      },
+      {
+        id: 'identify-modern-blues-c',
+        type: 'progression-inverse',
+        question: '¿Qué estilo moderno representan estos acordes?\nC7 - Db7 - F7 - Gb7 - C7 - A7 - Dm7 - Db7',
+        answer: 'Blues moderno con sustituciones en C',
+        options: shuffleOptions('Blues moderno con sustituciones en C', ['Jazz blues en C', 'Blues tradicional en C']),
+        explanation: 'Esta progresión es blues moderno en C con sustituciones tritónicas: Db7 (bII7 = sustituto de G7), Gb7 (bV7 = sustituto de C7). Las sustituciones crean movimiento cromático y sofisticación típica del jazz moderno.',
+        data: { key: 'C', style: 'modern-blues' }
+      },
+      {
+        id: 'identify-swing-blues-f',
+        type: 'progression-inverse',
+        question: '¿Qué estilo de la era swing representan estos acordes?\nF7 - Bb7 - Bo7 - F7 - Gm7 - C7',
+        answer: 'Swing blues en F',
+        options: shuffleOptions('Swing blues en F', ['Jazz blues en F', 'Bebop blues en F']),
+        explanation: 'F7-Bb7-Bo7-F7-Gm7-C7 es swing blues en F. Incorpora Bo7 (#IVo7 - disminuido cromático) que conecta Bb7 con F7, y ii-V (Gm7-C7). Típico del swing de los años 30-40, combina blues con sofisticación big band.',
+        data: { key: 'F', style: 'swing-blues' }
+      },
+      {
+        id: 'identify-texas-blues-a',
+        type: 'progression-inverse',
+        question: '¿Qué estilo regional representan estos acordes?\nA7 - D7 - A7 - E7 - E7 - A7 - A7',
+        answer: 'Texas blues en A',
+        options: shuffleOptions('Texas blues en A', ['Blues tradicional en A', 'Shuffle blues en A']),
+        explanation: 'A7-D7-A7-E7-E7-A7-A7 es Texas blues en A. Se caracteriza por V7-V7 en compases 9-10 (en lugar de V7-IV7) y final I7-I7 sin turnaround. Crea una sensación más reposada, típico del estilo Texas con guitarras eléctricas.',
+        data: { key: 'A', style: 'texas-blues' }
+      },
+      {
+        id: 'identify-minor-blues-extended-dm',
+        type: 'progression-inverse',
+        question: '¿Qué tipo de blues menor representan estos acordes?\nDm7 - Gm7 - Dm7 - A7 - Gm7 - Dm7',
+        answer: 'Blues menor extendido en Dm',
+        options: shuffleOptions('Blues menor extendido en Dm', ['ii-V-I en F', 'Progresión modal en Dm']),
+        explanation: 'Dm7-Gm7-Dm7-A7-Gm7-Dm7 es blues menor extendido en Dm. Mantiene la estructura de 12 compases pero con acordes menores: im7-ivm7-im7-V7-ivm7-im7. Más melancólico que el blues mayor, común en jazz latino y bossa nova.',
+        data: { key: 'Dm', style: 'minor-blues-extended' }
+      },
+      {
+        id: 'identify-modal-minor-blues-em',
+        type: 'progression-inverse',
+        question: '¿Qué estilo modal representan estos acordes?\nEm7 - D7 - A7 - Em7',
+        answer: 'Blues menor modal en Em',
+        options: shuffleOptions('Blues menor modal en Em', ['Blues menor tradicional', 'Progresión dórica']),
+        explanation: 'Em7-D7-A7-Em7 es blues menor modal en Em. Combina elementos del blues (Em7-A7) con modalidad (D7 = bVII7). El D7 es prestado del modo menor, creando un sonido más moderno y abierto que el blues menor tradicional.',
+        data: { key: 'Em', style: 'modal-minor-blues' }
+      },
+      {
+        id: 'identify-jazz-minor-blues-am',
+        type: 'progression-inverse',
+        question: '¿Qué estilo sofisticado representan estos acordes?\nAm(maj7) - Dm7 - E7alt - Am(maj7)',
+        answer: 'Jazz blues menor en Am',
+        options: shuffleOptions('Jazz blues menor en Am', ['Blues menor tradicional', 'ii-V-I menor']),
+        explanation: 'Am(maj7)-Dm7-E7alt-Am(maj7) es jazz blues menor en Am. Usa Am(maj7) (menor con séptima mayor) y E7alt (dominante alterado). La sofisticación armónica con extensiones y alteraciones es típica del jazz moderno y contemporáneo.',
+        data: { key: 'Am', style: 'jazz-minor-blues' }
+      }
+    ]
+  },
+
+  {
+    id: 'identify-modal-progressions',
+    name: 'Identificar Progresiones Modales',
+    description: 'Reconocer modos y sus progresiones características',
+    category: 'progression-inverse',
+    totalQuestions: 12,
+    questions: [
+      {
+        id: 'identify-dorian-vamp-d',
+        type: 'progression-inverse',
+        question: '¿Qué modo representan estos acordes?\nDm7 - Gmaj7 - Dm7 - Gmaj7',
+        answer: 'D Dórico',
+        options: shuffleOptions('D Dórico', ['D Menor Natural', 'G Mayor']),
+        explanation: 'Dm7-Gmaj7 es un vamp dórico en D. El Gmaj7 (IVmaj7) es la característica distintiva del dórico, diferenciándolo del menor natural que tendría Gm7. El IV mayor es la nota característica del modo dórico.',
+        data: { mode: 'D Dorian', type: 'modal-vamp' }
+      },
+      {
+        id: 'identify-mixolydian-vamp-g',
+        type: 'progression-inverse',
+        question: '¿Qué modo representan estos acordes?\nG7 - Fmaj7 - G7 - Fmaj7',
+        answer: 'G Mixolidio',
+        options: shuffleOptions('G Mixolidio', ['G Mayor', 'F Mayor']),
+        explanation: 'G7-Fmaj7 es un vamp mixolidio en G. El Fmaj7 (bVIImaj7) es la característica distintiva del mixolidio. El bVII mayor es la nota característica que diferencia el mixolidio del mayor natural.',
+        data: { mode: 'G Mixolydian', type: 'modal-vamp' }
+      },
+      {
+        id: 'identify-phrygian-vamp-e',
+        type: 'progression-inverse',
+        question: '¿Qué modo representan estos acordes?\nEm7 - Fmaj7 - Em7 - Fmaj7',
+        answer: 'E Frigio',
+        options: shuffleOptions('E Frigio', ['E Menor Natural', 'F Mayor']),
+        explanation: 'Em7-Fmaj7 es un vamp frigio en E. El Fmaj7 (bIImaj7) es la característica distintiva del frigio. El semitono E-F crea la tensión típica frigia, común en música española y flamenca.',
+        data: { mode: 'E Phrygian', type: 'modal-vamp' }
+      },
+      {
+        id: 'identify-lydian-vamp-f',
+        type: 'progression-inverse',
+        question: '¿Qué modo representan estos acordes?\nFmaj7 - Gmaj7 - Fmaj7 - Gmaj7',
+        answer: 'F Lidio',
+        options: shuffleOptions('F Lidio', ['F Mayor', 'G Mayor']),
+        explanation: 'Fmaj7-Gmaj7 es un vamp lidio en F. El Gmaj7 (IImaj7) es característico del lidio. El II mayor surge de la cuarta aumentada (#4) característica del modo lidio, creando un sonido "flotante".',
+        data: { mode: 'F Lydian', type: 'modal-vamp' }
+      },
+      {
+        id: 'identify-aeolian-modal-fm',
+        type: 'progression-inverse',
+        question: '¿Qué modo representan estos acordes?\nF#m7 - Emaj7 - Dmaj7 - Emaj7',
+        answer: 'F# Eólico (Menor Natural)',
+        options: shuffleOptions('F# Eólico (Menor Natural)', ['F# Dórico', 'E Mayor']),
+        explanation: 'F#m7-Emaj7-Dmaj7-Emaj7 es eólico modal en F#m. Evita el V mayor (C#7) para mantener el carácter modal. El bVI (Dmaj7) y bVII (Emaj7) son característicos del menor natural, creando sonoridad medieval/folk.',
+        data: { mode: 'F# Aeolian', type: 'modal-progression' }
+      },
+      {
+        id: 'identify-dorian-extended-a',
+        type: 'progression-inverse',
+        question: '¿Qué modo extendido representan estos acordes?\nAm7 - Dmaj7 - Gmaj7 - Am7',
+        answer: 'A Dórico extendido',
+        options: shuffleOptions('A Dórico extendido', ['A Menor Natural', 'D Mayor']),
+        explanation: 'Am7-Dmaj7-Gmaj7-Am7 es dórico extendido en A. Incorpora tanto el IV mayor (Dmaj7 - característica dórica) como el bVII mayor (Gmaj7), creando un sonido modal rico que combina elementos dóricos y eólicos.',
+        data: { mode: 'A Dorian Extended', type: 'modal-progression' }
+      },
+      {
+        id: 'identify-mixolydian-extended-c',
+        type: 'progression-inverse',
+        question: '¿Qué modo extendido representan estos acordes?\nC7 - Bbmaj7 - Fmaj7 - C7',
+        answer: 'C Mixolidio extendido',
+        options: shuffleOptions('C Mixolidio extendido', ['C Mayor', 'Bb Mayor']),
+        explanation: 'C7-Bbmaj7-Fmaj7-C7 es mixolidio extendido en C. Combina la séptima menor característica (Bb = bVII) con el IV mayor (F), creando un sonido que mezcla elementos del mayor y del dominante.',
+        data: { mode: 'C Mixolydian Extended', type: 'modal-progression' }
+      },
+      {
+        id: 'identify-phrygian-flamenco-a',
+        type: 'progression-inverse',
+        question: '¿Qué estilo modal representan estos acordes?\nAm - Bb - C - Bb',
+        answer: 'A Frigio (Flamenco)',
+        options: shuffleOptions('A Frigio (Flamenco)', ['A Menor Natural', 'Bb Mayor']),
+        explanation: 'Am-Bb-C-Bb es frigio flamenco en A. El movimiento bII-bIII-bII (Bb-C-Bb) con el semitono característico A-Bb crea la cadencia frigia fundamental en flamenco y música española.',
+        data: { mode: 'A Phrygian', style: 'flamenco' }
+      },
+      {
+        id: 'identify-dorian-rock-e',
+        type: 'progression-inverse',
+        question: '¿Qué modo rock representan estos acordes?\nEm7 - D7 - Amaj7 - Em7',
+        answer: 'E Dórico (Rock)',
+        options: shuffleOptions('E Dórico (Rock)', ['E Menor Natural', 'A Mayor']),
+        explanation: 'Em7-D7-Amaj7-Em7 es dórico rock en E. Combina el IV mayor dórico (Amaj7) con el bVII del menor natural (D7). Esta hibridación modal es común en rock progresivo, creando sonoridad modal con movimiento dinámico.',
+        data: { mode: 'E Dorian', style: 'rock' }
+      },
+      {
+        id: 'identify-mixolydian-funk-a',
+        type: 'progression-inverse',
+        question: '¿Qué modo funk representan estos acordes?\nA7 - G7 - A7 - G7',
+        answer: 'A Mixolidio (Funk)',
+        options: shuffleOptions('A Mixolidio (Funk)', ['A Mayor', 'G Mayor']),
+        explanation: 'A7-G7-A7-G7 es mixolidio funk en A. El movimiento I7-bVII7 es fundamental en funk. Ambos acordes dominantes crean tensión constante, típico del funk de James Brown y Parliament-Funkadelic.',
+        data: { mode: 'A Mixolydian', style: 'funk' }
+      },
+      {
+        id: 'identify-lydian-jazz-bb',
+        type: 'progression-inverse',
+        question: '¿Qué modo jazz representan estos acordes?\nBbmaj7#11 - Cmaj7 - Bbmaj7#11 - Cmaj7',
+        answer: 'Bb Lidio (Jazz)',
+        options: shuffleOptions('Bb Lidio (Jazz)', ['Bb Mayor', 'C Mayor']),
+        explanation: 'Bbmaj7#11-Cmaj7 es lidio jazz en Bb. El #11 (E natural) es la característica del lidio. Usado en jazz modal y música de Bill Evans, creando un sonido "flotante" y sofisticado típico del jazz moderno.',
+        data: { mode: 'Bb Lydian', style: 'jazz' }
+      },
+      {
+        id: 'identify-mixolydian-blues-d',
+        type: 'progression-inverse',
+        question: '¿Qué modo blues representan estos acordes?\nD7 - G7 - C7 - D7',
+        answer: 'D Mixolidio (Blues)',
+        options: shuffleOptions('D Mixolidio (Blues)', ['D Mayor', 'Blues tradicional en D']),
+        explanation: 'D7-G7-C7-D7 es mixolidio blues en D. Combina elementos del blues (I7-IV7) con la característica mixolidia (bVII7 = C7). Común en rock sureño y blues-rock, más modal que el blues tradicional.',
+        data: { mode: 'D Mixolydian', style: 'blues' }
+      }
+    ]
+  },
+
+  {
+    id: 'identify-rock-pop-progressions',
+    name: 'Identificar Progresiones Rock/Pop',
+    description: 'Reconocer progresiones populares en rock y pop',
+    category: 'progression-inverse',
+    totalQuestions: 10,
+    questions: [
+      {
+        id: 'identify-vi-IV-I-V-C',
+        type: 'progression-inverse',
+        question: '¿Qué progresión pop representan estos acordes?\nAm - F - C - G',
+        answer: 'vi-IV-I-V en C (Pop Ballad)',
+        options: shuffleOptions('vi-IV-I-V en C (Pop Ballad)', ['I-V-vi-IV en C', 'ii-V-I en C']),
+        explanation: 'Am-F-C-G es vi-IV-I-V en C, conocida como "pop ballad progression". Crea un arco emocional desde la melancolía (vi) hacia la resolución (I-V). Extremadamente popular en baladas pop desde los años 50.',
+        data: { key: 'C', style: 'pop-ballad' }
+      },
+      {
+        id: 'identify-I-V-vi-IV-C',
+        type: 'progression-inverse',
+        question: '¿Qué progresión pop representan estos acordes?\nC - G - Am - F',
+        answer: 'I-V-vi-IV en C (Pop Progression)',
+        options: shuffleOptions('I-V-vi-IV en C (Pop Progression)', ['vi-IV-I-V en C', 'I-vi-IV-V en C']),
+        explanation: 'C-G-Am-F es I-V-vi-IV en C, la famosa "progresión de los cuatro acordes". Aparece en miles de canciones pop. El movimiento I-V crea impulso, vi-IV añade color emocional.',
+        data: { key: 'C', style: 'pop-progression' }
+      },
+      {
+        id: 'identify-I-bVII-IV-I-C',
+        type: 'progression-inverse',
+        question: '¿Qué progresión rock representan estos acordes?\nC - Bb - F - C',
+        answer: 'I-bVII-IV-I en C (Rock Progression)',
+        options: shuffleOptions('I-bVII-IV-I en C (Rock Progression)', ['I-V-IV-I en C', 'I-vi-IV-I en C']),
+        explanation: 'C-Bb-F-C es I-bVII-IV-I en C. El Bb (bVII) es prestado del modo menor, creando el sonido "duro" característico del rock. Común en rock clásico, hard rock y metal.',
+        data: { key: 'C', style: 'rock-progression' }
+      },
+      {
+        id: 'identify-vi-IV-I-V-G',
+        type: 'progression-inverse',
+        question: '¿Qué progresión representan estos acordes?\nEm - C - G - D',
+        answer: 'vi-IV-I-V en G (Pop Ballad)',
+        options: shuffleOptions('vi-IV-I-V en G (Pop Ballad)', ['ii-V-I en G', 'I-V-vi-IV en G']),
+        explanation: 'Em-C-G-D es vi-IV-I-V en G. G mayor es muy popular por su comodidad en guitarra. Esta progresión aparece en innumerables canciones desde "Let It Be" hasta hits modernos.',
+        data: { key: 'G', style: 'pop-ballad' }
+      },
+      {
+        id: 'identify-I-V-vi-IV-G',
+        type: 'progression-inverse',
+        question: '¿Qué progresión representan estos acordes?\nG - D - Em - C',
+        answer: 'I-V-vi-IV en G (Pop Progression)',
+        options: shuffleOptions('I-V-vi-IV en G (Pop Progression)', ['vi-IV-I-V en G', 'I-vi-ii-V en G']),
+        explanation: 'G-D-Em-C es I-V-vi-IV en G. Esta secuencia en G es extremadamente común en música popular y rock. La facilidad de ejecución en guitarra la ha convertido en una de las más usadas en la historia del pop.',
+        data: { key: 'G', style: 'pop-progression' }
+      },
+      {
+        id: 'identify-I-bVII-IV-I-G',
+        type: 'progression-inverse',
+        question: '¿Qué progresión rock representan estos acordes?\nG - F - C - G',
+        answer: 'I-bVII-IV-I en G (Rock Progression)',
+        options: shuffleOptions('I-bVII-IV-I en G (Rock Progression)', ['I-V-IV-I en G', 'I-vi-IV-I en G']),
+        explanation: 'G-F-C-G es I-bVII-IV-I en G. El F mayor (bVII) es prestado del modo menor paralelo (Gm). Fundamental en rock clásico, aparece en canciones de The Beatles, Rolling Stones y muchas bandas de rock.',
+        data: { key: 'G', style: 'rock-progression' }
+      },
+      {
+        id: 'identify-vi-IV-I-V-F',
+        type: 'progression-inverse',
+        question: '¿Qué progresión representan estos acordes?\nDm - Bb - F - C',
+        answer: 'vi-IV-I-V en F (Pop Ballad)',
+        options: shuffleOptions('vi-IV-I-V en F (Pop Ballad)', ['ii-V-I en F', 'I-V-vi-IV en F']),
+        explanation: 'Dm-Bb-F-C es vi-IV-I-V en F. F mayor es común en música pop y R&B. Esta progresión crea un arco emocional perfecto: melancolía (vi), elevación (IV-I), tensión para repetir (V).',
+        data: { key: 'F', style: 'pop-ballad' }
+      },
+      {
+        id: 'identify-I-V-vi-IV-F',
+        type: 'progression-inverse',
+        question: '¿Qué progresión representan estos acordes?\nF - C - Dm - Bb',
+        answer: 'I-V-vi-IV en F (Pop Progression)',
+        options: shuffleOptions('I-V-vi-IV en F (Pop Progression)', ['vi-IV-I-V en F', 'I-vi-ii-V en F']),
+        explanation: 'F-C-Dm-Bb es I-V-vi-IV en F. F mayor es muy usada en baladas y música soul. Esta progresión aparece desde Motown hasta pop contemporáneo, creando un sonido cálido y familiar.',
+        data: { key: 'F', style: 'pop-progression' }
+      },
+      {
+        id: 'identify-vi-IV-I-V-D',
+        type: 'progression-inverse',
+        question: '¿Qué progresión representan estos acordes?\nBm - G - D - A',
+        answer: 'vi-IV-I-V en D (Pop Ballad)',
+        options: shuffleOptions('vi-IV-I-V en D (Pop Ballad)', ['ii-V-I en D', 'I-V-vi-IV en D']),
+        explanation: 'Bm-G-D-A es vi-IV-I-V en D. D mayor es excelente para guitarra y violín. Esta progresión aparece frecuentemente en música folk, country y pop-rock, creando un sonido brillante y optimista.',
+        data: { key: 'D', style: 'pop-ballad' }
+      },
+      {
+        id: 'identify-I-V-vi-IV-D',
+        type: 'progression-inverse',
+        question: '¿Qué progresión representan estos acordes?\nD - A - Bm - G',
+        answer: 'I-V-vi-IV en D (Pop Progression)',
+        options: shuffleOptions('I-V-vi-IV en D (Pop Progression)', ['vi-IV-I-V en D', 'I-vi-ii-V en D']),
+        explanation: 'D-A-Bm-G es I-V-vi-IV en D. D mayor es muy popular en música country y folk-rock. Esta progresión crea un sonido abierto y optimista, común en canciones de artistas como John Denver y música country moderna.',
+        data: { key: 'D', style: 'pop-progression' }
+      }
     ]
   }
 ];
@@ -1367,6 +1449,7 @@ function getEthnicScaleExplanation(scaleName: string): string {
 export const questionGroups: QuestionGroup[] = [
   ...progressionDirectGroups,
   ...progressionInverseGroups,
+  ...moreProgressionInverseGroups,
   ...scaleModeGroups,
   // Añadir todos los nuevos grupos
   ...bluesProgressionGroups,
