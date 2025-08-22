@@ -1,103 +1,122 @@
+import React from 'react';
 import { QuestionGroup } from '../types/music';
+import { questionGroups } from '../data/questionGroups';
+import { ArrowLeft, BookOpen, Users, Music } from 'lucide-react';
 
-// GRUPOS DE NÚMEROS ROMANOS → ACORDES
-const progressionDirectGroups: QuestionGroup[] = [
-  {
-    id: 'basic-ii-v-i',
-    name: 'ii-V-I Básico',
-    description: 'Progresiones ii-V-I en todas las tonalidades mayores y menores',
-    category: 'progression-direct',
-    totalQuestions: 15,
-    questions: [
-      {
-        id: 'ii-v-i-c-1',
-        type: 'progression-direct',
-        question: 'iim7 - V7 - Imaj7 en C',
-        answer: 'Dm7 - G7 - Cmaj7',
-        options: ['Dm7 - G7 - Cmaj7', 'Em7 - A7 - Dmaj7', 'Am7 - D7 - Gmaj7', 'Fm7 - Bb7 - Ebmaj7'],
-        explanation: 'En la tonalidad de C mayor, el ii grado es Dm7, el V grado es G7, y el I grado es Cmaj7.',
-        data: { key: 'C', romanNumerals: ['iim7', 'V7', 'Imaj7'] }
-      },
-      {
-        id: 'ii-v-i-f-1',
-        type: 'progression-direct',
-        question: 'iim7 - V7 - Imaj7 en F',
-        answer: 'Gm7 - C7 - Fmaj7',
-        options: ['Gm7 - C7 - Fmaj7', 'Am7 - D7 - Gmaj7', 'Dm7 - G7 - Cmaj7', 'Bm7 - E7 - Amaj7'],
-        explanation: 'En la tonalidad de F mayor, el ii grado es Gm7, el V grado es C7, y el I grado es Fmaj7.',
-        data: { key: 'F', romanNumerals: ['iim7', 'V7', 'Imaj7'] }
-      }
-    ]
-  }
-];
-
-// GRUPOS DE ACORDES → ANÁLISIS  
-const progressionInverseGroups: QuestionGroup[] = [
-  {
-    id: 'identify-ii-v-i',
-    name: 'Identificar ii-V-I',
-    description: 'Identifica progresiones ii-V-I mayores y menores en diferentes tonalidades',
-    category: 'progression-inverse',
-    totalQuestions: 15,
-    questions: [
-      {
-        id: 'identify-ii-v-i-c-1',
-        type: 'progression-inverse',
-        question: '¿Qué progresión y tonalidad representan estos acordes?\nDm7 - G7 - Cmaj7',
-        answer: 'ii-V-I en C',
-        options: ['ii-V-I en C', 'iii-VI-ii en F', 'vi-ii-V en Bb', 'i-IV-VII en Am'],
-        explanation: 'Dm7 - G7 - Cmaj7 es una progresión ii-V-I en la tonalidad de C mayor.',
-        data: { key: 'C', chords: ['Dm7', 'G7', 'Cmaj7'], romanNumerals: ['ii-V-I'] }
-      }
-    ]
-  }
-];
-
-// GRUPOS DE ESCALAS Y MODOS
-const scaleModeGroups: QuestionGroup[] = [
-  {
-    id: 'church-modes',
-    name: 'Modos Eclesiásticos',
-    description: 'Los 7 modos tradicionales derivados de la escala mayor',
-    category: 'scale-mode',
-    totalQuestions: 14,
-    questions: [
-      {
-        id: 'mode-ionian-c-1',
-        type: 'scale-mode',
-        question: '¿Qué modo se usa sobre Cmaj7?',
-        answer: 'C Jónico (Mayor)',
-        options: ['C Jónico (Mayor)', 'C Dórico', 'C Lidio', 'C Mixolidio'],
-        explanation: 'Sobre Cmaj7 se usa el modo C Jónico (escala mayor). Es el primer modo de la escala mayor.',
-        data: { scale: 'C Ionian', chord: 'Cmaj7' }
-      }
-    ]
-  }
-];
-
-// EXPORTAR TODOS LOS GRUPOS
-export const questionGroups: QuestionGroup[] = [
-  ...progressionDirectGroups,
-  ...progressionInverseGroups,
-  ...scaleModeGroups
-];
-
-// FUNCIÓN PARA OBTENER ESTADÍSTICAS
-export function getCategoryStats() {
-  const stats = {
-    'progression-direct': { groups: 0, questions: 0 },
-    'progression-inverse': { groups: 0, questions: 0 },
-    'scale-mode': { groups: 0, questions: 0 }
-  };
-
-  questionGroups.forEach(group => {
-    if (stats[group.category]) {
-      stats[group.category].groups++;
-      stats[group.category].questions += group.totalQuestions;
-    }
-  });
-
-  return stats;
+interface GroupSelectorProps {
+  selectedType: 'progression-direct' | 'progression-inverse' | 'scale-mode';
+  onSelectGroup: (group: QuestionGroup) => void;
+  onBack: () => void;
 }
 
-export default getCategoryStats
+const GroupSelector: React.FC<GroupSelectorProps> = ({ selectedType, onSelectGroup, onBack }) => {
+  const filteredGroups = questionGroups.filter(group => group.category === selectedType);
+
+  const getCategoryTitle = () => {
+    switch (selectedType) {
+      case 'progression-direct':
+        return 'Números Romanos → Acordes';
+      case 'progression-inverse':
+        return 'Acordes → Análisis';
+      case 'scale-mode':
+        return 'Escalas y Modos';
+      default:
+        return 'Seleccionar Grupo';
+    }
+  };
+
+  const getCategoryIcon = () => {
+    switch (selectedType) {
+      case 'progression-direct':
+        return <Music className="w-6 h-6" />;
+      case 'progression-inverse':
+        return <Users className="w-6 h-6" />;
+      case 'scale-mode':
+        return <BookOpen className="w-6 h-6" />;
+      default:
+        return <BookOpen className="w-6 h-6" />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 p-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center mb-8">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Volver
+          </button>
+        </div>
+
+        {/* Title */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            {getCategoryIcon()}
+            <h1 className="text-3xl font-bold text-gray-800">
+              {getCategoryTitle()}
+            </h1>
+          </div>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Selecciona un grupo de preguntas para comenzar tu práctica
+          </p>
+        </div>
+
+        {/* Groups Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredGroups.map((group) => (
+            <div
+              key={group.id}
+              onClick={() => onSelectGroup(group)}
+              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 border border-gray-100"
+            >
+              <div className="p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-gray-800 leading-tight">
+                    {group.name}
+                  </h3>
+                  <span className="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">
+                    {group.totalQuestions} preguntas
+                  </span>
+                </div>
+                
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                  {group.description}
+                </p>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <BookOpen className="w-4 h-4" />
+                    <span>Nivel: Intermedio</span>
+                  </div>
+                  
+                  <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
+                    Comenzar
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {filteredGroups.length === 0 && (
+          <div className="text-center py-12">
+            <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+              No hay grupos disponibles
+            </h3>
+            <p className="text-gray-500">
+              Los grupos para esta categoría están en desarrollo
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default GroupSelector;
