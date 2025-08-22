@@ -1,238 +1,101 @@
-import React, { useState, useEffect } from 'react';
-import FlashCard from './components/FlashCard';
-import QuizSelector from './components/QuizSelector';
-import GroupSelector from './components/GroupSelector';
-import QuizProgress from './components/QuizProgress';
-import ScaleSelector from './components/ScaleSelector';
-import { FlashCard as FlashCardType, QuizResult, QuizSettings, QuestionGroup, QuizProgress as QuizProgressType } from './types/music';
-import { Home, RotateCcw } from 'lucide-react';
+import { QuestionGroup } from '../types/music';
 
-function App() {
-  const [currentQuizSettings, setCurrentQuizSettings] = useState<QuizSettings | null>(null);
-  const [selectedGroup, setSelectedGroup] = useState<QuestionGroup | null>(null);
-  const [quizProgress, setQuizProgress] = useState<QuizProgressType | null>(null);
-  const [currentCard, setCurrentCard] = useState<FlashCardType | null>(null);
-  const [showGroupSelector, setShowGroupSelector] = useState(false);
-  const [showScaleSelector, setShowScaleSelector] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedScales, setSelectedScales] = useState<string[]>([]);
-
-  const startQuiz = (type: 'progression-direct' | 'progression-inverse' | 'scale-mode', withSettings = false) => {
-    if (type === 'scale-mode' && withSettings) {
-      setShowScaleSelector(true);
-      setCurrentQuizSettings({ type });
-      return;
-    }
-    
-    // Para progresiones, mostrar selector de grupos
-    if (type === 'progression-direct' || type === 'progression-inverse') {
-      setCurrentQuizSettings({ type });
-      setShowGroupSelector(true);
-      return;
-    }
-    
-    // Para escalas sin configuración, mostrar selector de grupos
-    setCurrentQuizSettings({ type });
-    setShowGroupSelector(true);
-  };
-
-  const selectGroup = (group: QuestionGroup) => {
-    setSelectedGroup(group);
-    setShowGroupSelector(false);
-    
-    // Inicializar progreso del quiz
-    const progress: QuizProgressType = {
-      groupId: group.id,
-      completedQuestions: [],
-      currentIndex: 0,
-      score: { correct: 0, total: 0 },
-      streak: 0
-    };
-    
-    setQuizProgress(progress);
-    setCurrentCard(group.questions[0]);
-  };
-
-  const startScaleQuiz = () => {
-    if (currentQuizSettings && selectedScales.length > 0) {
-      const settings: QuizSettings = {
-        ...currentQuizSettings,
-        selectedScales
-      };
-      setCurrentQuizSettings(settings);
-      // Para escalas, mantener el sistema anterior por ahora
-      setShowScaleSelector(false);
-    }
-  };
-
-  const handleAnswer = (result: QuizResult) => {
-    if (!quizProgress || !selectedGroup) return;
-    
-    const newProgress = {
-      ...quizProgress,
-      completedQuestions: [...quizProgress.completedQuestions, currentCard!.id],
-      score: {
-        correct: quizProgress.score.correct + (result.correct ? 1 : 0),
-        total: quizProgress.score.total + 1
+// GRUPOS DE NÚMEROS ROMANOS → ACORDES
+const progressionDirectGroups: QuestionGroup[] = [
+  {
+    id: 'basic-ii-v-i',
+    name: 'ii-V-I Básico',
+    description: 'Progresiones ii-V-I en todas las tonalidades mayores y menores',
+    category: 'progression-direct',
+    totalQuestions: 15,
+    questions: [
+      {
+        id: 'ii-v-i-c-1',
+        type: 'progression-direct',
+        question: 'iim7 - V7 - Imaj7 en C',
+        answer: 'Dm7 - G7 - Cmaj7',
+        options: ['Dm7 - G7 - Cmaj7', 'Em7 - A7 - Dmaj7', 'Am7 - D7 - Gmaj7', 'Fm7 - Bb7 - Ebmaj7'],
+        explanation: 'En la tonalidad de C mayor, el ii grado es Dm7, el V grado es G7, y el I grado es Cmaj7.',
+        data: { key: 'C', romanNumerals: ['iim7', 'V7', 'Imaj7'] }
       },
-      streak: result.correct ? quizProgress.streak + 1 : 0
-    };
-    
-    setQuizProgress(newProgress);
-  };
-
-  const handleNext = () => {
-    if (!quizProgress || !selectedGroup) return;
-    
-    // Encontrar la siguiente pregunta no completada
-    const nextIndex = selectedGroup.questions.findIndex(
-      (q, index) => index > quizProgress.currentIndex && !quizProgress.completedQuestions.includes(q.id)
-    );
-    
-    if (nextIndex !== -1) {
-      const newProgress = {
-        ...quizProgress,
-        currentIndex: nextIndex
-      };
-      setQuizProgress(newProgress);
-      setCurrentCard(selectedGroup.questions[nextIndex]);
-    } else {
-      // Si no hay más preguntas, buscar cualquier pregunta no completada
-      const uncompletedIndex = selectedGroup.questions.findIndex(
-        q => !quizProgress.completedQuestions.includes(q.id)
-      );
-      
-      if (uncompletedIndex !== -1) {
-        const newProgress = {
-          ...quizProgress,
-          currentIndex: uncompletedIndex
-        };
-        setQuizProgress(newProgress);
-        setCurrentCard(selectedGroup.questions[uncompletedIndex]);
+      {
+        id: 'ii-v-i-f-1',
+        type: 'progression-direct',
+        question: 'iim7 - V7 - Imaj7 en F',
+        answer: 'Gm7 - C7 - Fmaj7',
+        options: ['Gm7 - C7 - Fmaj7', 'Am7 - D7 - Gmaj7', 'Dm7 - G7 - Cmaj7', 'Bm7 - E7 - Amaj7'],
+        explanation: 'En la tonalidad de F mayor, el ii grado es Gm7, el V grado es C7, y el I grado es Fmaj7.',
+        data: { key: 'F', romanNumerals: ['iim7', 'V7', 'Imaj7'] }
       }
+    ]
+  }
+];
+
+// GRUPOS DE ACORDES → ANÁLISIS  
+const progressionInverseGroups: QuestionGroup[] = [
+  {
+    id: 'identify-ii-v-i',
+    name: 'Identificar ii-V-I',
+    description: 'Identifica progresiones ii-V-I mayores y menores en diferentes tonalidades',
+    category: 'progression-inverse',
+    totalQuestions: 15,
+    questions: [
+      {
+        id: 'identify-ii-v-i-c-1',
+        type: 'progression-inverse',
+        question: '¿Qué progresión y tonalidad representan estos acordes?\nDm7 - G7 - Cmaj7',
+        answer: 'ii-V-I en C',
+        options: ['ii-V-I en C', 'iii-VI-ii en F', 'vi-ii-V en Bb', 'i-IV-VII en Am'],
+        explanation: 'Dm7 - G7 - Cmaj7 es una progresión ii-V-I en la tonalidad de C mayor.',
+        data: { key: 'C', chords: ['Dm7', 'G7', 'Cmaj7'], romanNumerals: ['ii-V-I'] }
+      }
+    ]
+  }
+];
+
+// GRUPOS DE ESCALAS Y MODOS
+const scaleModeGroups: QuestionGroup[] = [
+  {
+    id: 'church-modes',
+    name: 'Modos Eclesiásticos',
+    description: 'Los 7 modos tradicionales derivados de la escala mayor',
+    category: 'scale-mode',
+    totalQuestions: 14,
+    questions: [
+      {
+        id: 'mode-ionian-c-1',
+        type: 'scale-mode',
+        question: '¿Qué modo se usa sobre Cmaj7?',
+        answer: 'C Jónico (Mayor)',
+        options: ['C Jónico (Mayor)', 'C Dórico', 'C Lidio', 'C Mixolidio'],
+        explanation: 'Sobre Cmaj7 se usa el modo C Jónico (escala mayor). Es el primer modo de la escala mayor.',
+        data: { scale: 'C Ionian', chord: 'Cmaj7' }
+      }
+    ]
+  }
+];
+
+// EXPORTAR TODOS LOS GRUPOS
+export const questionGroups: QuestionGroup[] = [
+  ...progressionDirectGroups,
+  ...progressionInverseGroups,
+  ...scaleModeGroups
+];
+
+// FUNCIÓN PARA OBTENER ESTADÍSTICAS
+export function getCategoryStats() {
+  const stats = {
+    'progression-direct': { groups: 0, questions: 0 },
+    'progression-inverse': { groups: 0, questions: 0 },
+    'scale-mode': { groups: 0, questions: 0 }
+  };
+
+  questionGroups.forEach(group => {
+    if (stats[group.category]) {
+      stats[group.category].groups++;
+      stats[group.category].questions += group.totalQuestions;
     }
-  };
+  });
 
-  const resetQuiz = () => {
-    setCurrentQuizSettings(null);
-    setSelectedGroup(null);
-    setQuizProgress(null);
-    setCurrentCard(null);
-    setShowGroupSelector(false);
-    setShowScaleSelector(false);
-    setSelectedCategories([]);
-    setSelectedScales([]);
-  };
-
-  const resetCurrentQuiz = () => {
-    if (selectedGroup) {
-      const progress: QuizProgressType = {
-        groupId: selectedGroup.id,
-        completedQuestions: [],
-        currentIndex: 0,
-        score: { correct: 0, total: 0 },
-        streak: 0
-      };
-      setQuizProgress(progress);
-      setCurrentCard(selectedGroup.questions[0]);
-    }
-  };
-
-  const backToGroupSelector = () => {
-    setSelectedGroup(null);
-    setQuizProgress(null);
-    setCurrentCard(null);
-    setShowGroupSelector(true);
-  };
-
-  const backToMainMenu = () => {
-    setCurrentQuizSettings(null);
-    setSelectedGroup(null);
-    setQuizProgress(null);
-    setCurrentCard(null);
-    setShowGroupSelector(false);
-    setShowScaleSelector(false);
-    setSelectedCategories([]);
-    setSelectedScales([]);
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-      <div className="container mx-auto px-4 py-8">
-        {!currentQuizSettings && !showScaleSelector && !showGroupSelector ? (
-          <QuizSelector onSelectQuiz={startQuiz} />
-        ) : showGroupSelector && currentQuizSettings ? (
-          <GroupSelector
-            selectedType={currentQuizSettings.type}
-            onSelectGroup={selectGroup}
-            onBack={backToMainMenu}
-          />
-        ) : showScaleSelector ? (
-          <>
-            <div className="flex justify-start mb-6">
-              <button
-                onClick={backToMainMenu}
-                className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-              >
-                <Home className="w-5 h-5" />
-                Volver al menú
-              </button>
-            </div>
-            <ScaleSelector
-              selectedCategories={selectedCategories}
-              selectedScales={selectedScales}
-              onCategoriesChange={setSelectedCategories}
-              onScalesChange={setSelectedScales}
-              onStartQuiz={startScaleQuiz}
-            />
-          </>
-        ) : selectedGroup && quizProgress ? (
-          <>
-            <div className="flex justify-between items-center mb-6">
-              <button
-                onClick={backToGroupSelector}
-                className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-              >
-                ← Volver a grupos
-              </button>
-              
-              <div className="flex gap-3">
-                <button
-                  onClick={backToMainMenu}
-                  className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                >
-                  <Home className="w-5 h-5" />
-                  Menú principal
-                </button>
-                
-                <button
-                  onClick={resetCurrentQuiz}
-                  className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                >
-                  <RotateCcw className="w-5 h-5" />
-                  Reiniciar grupo
-                </button>
-              </div>
-            </div>
-
-            <QuizProgress progress={quizProgress} group={selectedGroup} />
-
-            {currentCard && (
-              <FlashCard
-                card={currentCard}
-                onAnswer={handleAnswer}
-                onNext={handleNext}
-              />
-            )}
-          </>
-        ) : (
-          <div className="text-center">
-            <p>Cargando...</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  return stats;
 }
-
-export default App;
