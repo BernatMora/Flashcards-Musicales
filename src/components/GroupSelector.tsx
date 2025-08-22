@@ -1,5 +1,5 @@
 import { QuestionGroup, FlashCard } from '../types/music';
-import { progressions, scales } from './musicData';
+import { progressions, scales } from '../data/musicData';
 
 // Función para generar opciones incorrectas
 function generateWrongOptions(correctAnswer: string, allOptions: string[], count: number = 2): string[] {
@@ -1460,21 +1460,6 @@ export const questionGroups: QuestionGroup[] = [
   ...minorScaleGroups,
   ...pentatonicScaleGroups
 ];
-
-// Función para obtener estadísticas por categoría
-export function getCategoryStats() {
-  const stats: Record<string, { groups: number; questions: number }> = {};
-  
-  questionGroups.forEach(group => {
-    if (!stats[group.category]) {
-      stats[group.category] = { groups: 0, questions: 0 };
-    }
-    stats[group.category].groups++;
-    stats[group.category].questions += group.totalQuestions;
-  });
-  
-  return { stats };
-}
 
 // Funciones auxiliares para explicaciones detalladas
 function getMinorScaleCharacteristic(scaleName: string): string {
