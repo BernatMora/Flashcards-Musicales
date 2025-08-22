@@ -1,5 +1,5 @@
 import { QuestionGroup, FlashCard } from '../types/music';
-import { progressions, scales } from '../data/musicData';
+import { progressions, scales } from './musicData';
 
 // Función para generar opciones incorrectas
 function generateWrongOptions(correctAnswer: string, allOptions: string[], count: number = 2): string[] {
@@ -1535,3 +1535,5 @@ function getStyleContext(scaleName: string): string {
   }
   return 'diversos estilos musicales según su sonoridad característica';
 }
+
+export default getStyleContext
