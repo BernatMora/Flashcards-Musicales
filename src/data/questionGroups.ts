@@ -435,6 +435,625 @@ const scaleModeGroups: QuestionGroup[] = [
   }
 ];
 
+// NUEVOS GRUPOS DE PROGRESIONES DE BLUES
+const bluesProgressionGroups: QuestionGroup[] = [
+  {
+    id: 'blues-12-bar',
+    name: 'Blues de 12 Compases',
+    description: 'Estructura básica del blues de 12 compases en diferentes tonalidades',
+    category: 'progression-direct',
+    totalQuestions: 15,
+    questions: [
+      ...['C', 'G', 'F', 'Bb', 'E', 'A', 'D'].map((key, index) => {
+        const chords = {
+          'C': ['C7', 'C7', 'C7', 'C7', 'F7', 'F7', 'C7', 'C7', 'G7', 'F7', 'C7', 'G7'],
+          'G': ['G7', 'G7', 'G7', 'G7', 'C7', 'C7', 'G7', 'G7', 'D7', 'C7', 'G7', 'D7'],
+          'F': ['F7', 'F7', 'F7', 'F7', 'Bb7', 'Bb7', 'F7', 'F7', 'C7', 'Bb7', 'F7', 'C7'],
+          'Bb': ['Bb7', 'Bb7', 'Bb7', 'Bb7', 'Eb7', 'Eb7', 'Bb7', 'Bb7', 'F7', 'Eb7', 'Bb7', 'F7'],
+          'E': ['E7', 'E7', 'E7', 'E7', 'A7', 'A7', 'E7', 'E7', 'B7', 'A7', 'E7', 'B7'],
+          'A': ['A7', 'A7', 'A7', 'A7', 'D7', 'D7', 'A7', 'A7', 'E7', 'D7', 'A7', 'E7'],
+          'D': ['D7', 'D7', 'D7', 'D7', 'G7', 'G7', 'D7', 'D7', 'A7', 'G7', 'D7', 'A7']
+        }[key] || ['C7', 'C7', 'C7', 'C7', 'F7', 'F7', 'C7', 'C7', 'G7', 'F7', 'C7', 'G7'];
+        
+        const allAnswers = [
+          'C7 - C7 - C7 - C7 - F7 - F7 - C7 - C7 - G7 - F7 - C7 - G7',
+          'G7 - G7 - G7 - G7 - C7 - C7 - G7 - G7 - D7 - C7 - G7 - D7',
+          'F7 - F7 - F7 - F7 - Bb7 - Bb7 - F7 - F7 - C7 - Bb7 - F7 - C7',
+          'Bb7 - Bb7 - Bb7 - Bb7 - Eb7 - Eb7 - Bb7 - Bb7 - F7 - Eb7 - Bb7 - F7',
+          'E7 - E7 - E7 - E7 - A7 - A7 - E7 - E7 - B7 - A7 - E7 - B7'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `blues-12-bar-${key}-${index}`,
+          type: 'progression-direct' as const,
+          question: `Blues de 12 compases en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `El blues de 12 compases en ${key} sigue la estructura clásica: 4 compases de I7 (${chords[0]}) - 2 compases de IV7 (${chords[4]}) - 2 compases de I7 - 1 compás de V7 (${chords[8]}) - 1 compás de IV7 - 2 compases de I7. Esta es la forma más básica y fundamental del blues, donde todos los acordes son dominantes (7ª menor) para crear la sonoridad característica del blues. La progresión se basa en los grados I-IV-V de la escala mayor, pero usando acordes dominantes en lugar de los acordes diatónicos tradicionales.`,
+          data: { key, chords, romanNumerals: ['I7', 'I7', 'I7', 'I7', 'IV7', 'IV7', 'I7', 'I7', 'V7', 'IV7', 'I7', 'V7'] }
+        };
+      }),
+      
+      // Jazz blues
+      ...['C', 'F', 'Bb', 'G', 'D', 'A', 'E', 'Ab'].map((key, index) => {
+        const chords = {
+          'C': ['C7', 'A7', 'Dm7', 'G7', 'F7', 'F7', 'C7', 'A7', 'Dm7', 'G7', 'C7', 'Dm7', 'G7'],
+          'F': ['F7', 'D7', 'Gm7', 'C7', 'Bb7', 'Bb7', 'F7', 'D7', 'Gm7', 'C7', 'F7', 'Gm7', 'C7'],
+          'Bb': ['Bb7', 'G7', 'Cm7', 'F7', 'Eb7', 'Eb7', 'Bb7', 'G7', 'Cm7', 'F7', 'Bb7', 'Cm7', 'F7'],
+          'G': ['G7', 'E7', 'Am7', 'D7', 'C7', 'C7', 'G7', 'E7', 'Am7', 'D7', 'G7', 'Am7', 'D7'],
+          'D': ['D7', 'B7', 'Em7', 'A7', 'G7', 'G7', 'D7', 'B7', 'Em7', 'A7', 'D7', 'Em7', 'A7'],
+          'A': ['A7', 'F#7', 'Bm7', 'E7', 'D7', 'D7', 'A7', 'F#7', 'Bm7', 'E7', 'A7', 'Bm7', 'E7'],
+          'E': ['E7', 'C#7', 'F#m7', 'B7', 'A7', 'A7', 'E7', 'C#7', 'F#m7', 'B7', 'E7', 'F#m7', 'B7'],
+          'Ab': ['Ab7', 'F7', 'Bbm7', 'Eb7', 'Db7', 'Db7', 'Ab7', 'F7', 'Bbm7', 'Eb7', 'Ab7', 'Bbm7', 'Eb7']
+        }[key] || ['C7', 'A7', 'Dm7', 'G7', 'F7', 'F7', 'C7', 'A7', 'Dm7', 'G7', 'C7', 'Dm7', 'G7'];
+        
+        const allAnswers = [
+          'C7 - A7 - Dm7 - G7 - F7 - F7 - C7 - A7 - Dm7 - G7 - C7 - Dm7 - G7',
+          'F7 - D7 - Gm7 - C7 - Bb7 - Bb7 - F7 - D7 - Gm7 - C7 - F7 - Gm7 - C7',
+          'Bb7 - G7 - Cm7 - F7 - Eb7 - Eb7 - Bb7 - G7 - Cm7 - F7 - Bb7 - Cm7 - F7',
+          'G7 - E7 - Am7 - D7 - C7 - C7 - G7 - E7 - Am7 - D7 - G7 - Am7 - D7'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `jazz-blues-${key}-${index + 7}`,
+          type: 'progression-direct' as const,
+          question: `Jazz blues en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `El jazz blues en ${key} es una sofisticación del blues básico que incorpora elementos del jazz: I7 (${chords[0]}) - VI7 (${chords[1]}, dominante secundario V7/ii) - ii7 (${chords[2]}) - V7 (${chords[3]}) - IV7 (${chords[4]}) - IV7 - I7 - VI7 - ii7 - V7 - I7 - ii7 - V7. Esta versión sustituye algunos acordes del blues básico con progresiones ii-V-I típicas del jazz, creando un movimiento armónico más sofisticado. El VI7 funciona como dominante secundario del ii grado, y las progresiones ii-V crean cadencias que dan más fluidez armónica que el blues tradicional.`,
+          data: { key, chords, romanNumerals: ['I7', 'VI7', 'ii7', 'V7', 'IV7', 'IV7', 'I7', 'VI7', 'ii7', 'V7', 'I7', 'ii7', 'V7'] }
+        };
+      })
+    ]
+  }
+];
+
+// GRUPOS DE PROGRESIONES MODALES
+const modalProgressionGroups: QuestionGroup[] = [
+  {
+    id: 'modal-progressions',
+    name: 'Progresiones Modales',
+    description: 'Vamps y progresiones características de los modos dórico, mixolidio y frigio',
+    category: 'progression-direct',
+    totalQuestions: 12,
+    questions: [
+      // Dórico
+      ...['D', 'A', 'E', 'G'].map((key, index) => {
+        const chords = {
+          'D': ['Dm7', 'Gmaj7'],
+          'A': ['Am7', 'Dmaj7'],
+          'E': ['Em7', 'Amaj7'],
+          'G': ['Gm7', 'Cmaj7']
+        }[key] || ['Dm7', 'Gmaj7'];
+        
+        const allAnswers = [
+          'Dm7 - Gmaj7', 'Am7 - Dmaj7', 'Em7 - Amaj7', 'Gm7 - Cmaj7',
+          'Cm7 - Fmaj7', 'Fm7 - Bbmaj7', 'Bm7 - Emaj7'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `dorian-vamp-${key}-${index}`,
+          type: 'progression-direct' as const,
+          question: `Vamp dórico en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `El vamp dórico en ${key} utiliza los acordes ${chords.join(' - ')}. En el modo dórico, el acorde característico es el IV mayor (${chords[1]}) que contrasta con el i menor (${chords[0]}). Esta progresión im7-IVmaj7 es típica del modo dórico y se encuentra en temas como "So What" de Miles Davis. El modo dórico es el segundo modo de la escala mayor, y su característica distintiva es la 6ª mayor que le da un color menor pero luminoso. La progresión crea una sonoridad modal estable que evita las cadencias tradicionales V-I del sistema tonal.`,
+          data: { key: `${key} Dorian`, chords, romanNumerals: ['im7', 'IVmaj7'] }
+        };
+      }),
+      
+      // Mixolidio
+      ...['G', 'D', 'A', 'C'].map((key, index) => {
+        const chords = {
+          'G': ['G7', 'Fmaj7'],
+          'D': ['D7', 'Cmaj7'],
+          'A': ['A7', 'Gmaj7'],
+          'C': ['C7', 'Bbmaj7']
+        }[key] || ['G7', 'Fmaj7'];
+        
+        const allAnswers = [
+          'G7 - Fmaj7', 'D7 - Cmaj7', 'A7 - Gmaj7', 'C7 - Bbmaj7',
+          'E7 - Dmaj7', 'B7 - Amaj7', 'F7 - Ebmaj7'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `mixolydian-vamp-${key}-${index + 4}`,
+          type: 'progression-direct' as const,
+          question: `Vamp mixolidio en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `El vamp mixolidio en ${key} utiliza ${chords.join(' - ')}. El modo mixolidio se caracteriza por su 7ª menor, lo que hace que el acorde de tónica sea dominante (I7 = ${chords[0]}) en lugar de mayor. El bVII mayor (${chords[1]}) es el acorde característico del mixolidio y crea una sonoridad relajada típica del rock, funk y música modal. Esta progresión I7-bVIImaj7 evita la resolución tradicional del acorde dominante, manteniéndose en el centro tonal mixolidio. Es común en temas como "The Chicken" de Jaco Pastorius y mucha música de los años 70.`,
+          data: { key: `${key} Mixolydian`, chords, romanNumerals: ['I7', 'bVIImaj7'] }
+        };
+      }),
+      
+      // Frigio
+      ...['E', 'A', 'B', 'F#'].map((key, index) => {
+        const chords = {
+          'E': ['Em7', 'Fmaj7'],
+          'A': ['Am7', 'Bbmaj7'],
+          'B': ['Bm7', 'Cmaj7'],
+          'F#': ['F#m7', 'Gmaj7']
+        }[key] || ['Em7', 'Fmaj7'];
+        
+        const allAnswers = [
+          'Em7 - Fmaj7', 'Am7 - Bbmaj7', 'Bm7 - Cmaj7', 'F#m7 - Gmaj7',
+          'Dm7 - Ebmaj7', 'Gm7 - Abmaj7', 'Cm7 - Dbmaj7'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `phrygian-vamp-${key}-${index + 8}`,
+          type: 'progression-direct' as const,
+          question: `Vamp frigio en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `El vamp frigio en ${key} utiliza ${chords.join(' - ')}. El modo frigio se caracteriza por su 2ª menor, creando una sonoridad oscura y exótica. El bII mayor (${chords[1]}) es el acorde característico del frigio y crea un movimiento semitonal muy distintivo desde la tónica menor (${chords[0]}). Esta progresión im7-bIImaj7 es típica del flamenco, música española y metal moderno. El frigio es el tercer modo de la escala mayor y su sonoridad evoca música del Medio Oriente y España. La progresión crea una tensión constante que nunca resuelve de manera tradicional.`,
+          data: { key: `${key} Phrygian`, chords, romanNumerals: ['im7', 'bIImaj7'] }
+        };
+      })
+    ]
+  }
+];
+
+// GRUPOS DE ROCK/POP
+const rockPopProgressionGroups: QuestionGroup[] = [
+  {
+    id: 'pop-progressions',
+    name: 'Progresiones de Pop/Rock',
+    description: 'Las progresiones más comunes en música popular: vi-IV-I-V, I-V-vi-IV',
+    category: 'progression-direct',
+    totalQuestions: 15,
+    questions: [
+      // vi-IV-I-V (Pop ballad)
+      ...['C', 'G', 'F', 'D', 'A', 'E', 'Bb', 'Eb'].map((key, index) => {
+        const chords = {
+          'C': ['Am', 'F', 'C', 'G'],
+          'G': ['Em', 'C', 'G', 'D'],
+          'F': ['Dm', 'Bb', 'F', 'C'],
+          'D': ['Bm', 'G', 'D', 'A'],
+          'A': ['F#m', 'D', 'A', 'E'],
+          'E': ['C#m', 'A', 'E', 'B'],
+          'Bb': ['Gm', 'Eb', 'Bb', 'F'],
+          'Eb': ['Cm', 'Ab', 'Eb', 'Bb']
+        }[key] || ['Am', 'F', 'C', 'G'];
+        
+        const allAnswers = [
+          'Am - F - C - G', 'Em - C - G - D', 'Dm - Bb - F - C', 'Bm - G - D - A',
+          'F#m - D - A - E', 'C#m - A - E - B', 'Gm - Eb - Bb - F', 'Cm - Ab - Eb - Bb'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `pop-ballad-${key}-${index}`,
+          type: 'progression-direct' as const,
+          question: `vi-IV-I-V en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `La progresión vi-IV-I-V en ${key} es ${chords.join(' - ')}. Esta es una de las progresiones más populares en la música occidental, especialmente en baladas pop y rock. La secuencia vi (${chords[0]}, relativo menor) - IV (${chords[1]}, subdominante) - I (${chords[2]}, tónica) - V (${chords[3]}, dominante) crea un movimiento emocional muy efectivo: comienza con melancolía (vi), pasa por estabilidad (IV), llega al hogar (I) y crea expectativa (V). Se encuentra en miles de canciones como "Don't Stop Believin'" de Journey, "Someone Like You" de Adele, y muchas más. Su popularidad se debe a que combina elementos menores y mayores de manera muy natural.`,
+          data: { key, chords, romanNumerals: ['vi', 'IV', 'I', 'V'] }
+        };
+      }),
+      
+      // I-V-vi-IV
+      ...['C', 'G', 'F', 'D', 'A', 'E', 'Bb'].map((key, index) => {
+        const chords = {
+          'C': ['C', 'G', 'Am', 'F'],
+          'G': ['G', 'D', 'Em', 'C'],
+          'F': ['F', 'C', 'Dm', 'Bb'],
+          'D': ['D', 'A', 'Bm', 'G'],
+          'A': ['A', 'E', 'F#m', 'D'],
+          'E': ['E', 'B', 'C#m', 'A'],
+          'Bb': ['Bb', 'F', 'Gm', 'Eb']
+        }[key] || ['C', 'G', 'Am', 'F'];
+        
+        const allAnswers = [
+          'C - G - Am - F', 'G - D - Em - C', 'F - C - Dm - Bb', 'D - A - Bm - G',
+          'A - E - F#m - D', 'E - B - C#m - A', 'Bb - F - Gm - Eb'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `pop-progression-${key}-${index + 8}`,
+          type: 'progression-direct' as const,
+          question: `I-V-vi-IV en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `La progresión I-V-vi-IV en ${key} es ${chords.join(' - ')}. Esta progresión es extremadamente común en música pop, rock y country. La secuencia I (${chords[0]}, tónica) - V (${chords[1]}, dominante) - vi (${chords[2]}, relativo menor) - IV (${chords[3]}, subdominante) crea un ciclo armónico muy satisfactorio que puede repetirse indefinidamente. Comienza con estabilidad (I), crea tensión (V), introduce melancolía (vi) y prepara el retorno (IV). Se encuentra en canciones como "Let It Be" de The Beatles, "Don't Stop Me Now" de Queen, y "With or Without You" de U2. Su efectividad radica en el equilibrio perfecto entre tensión y relajación.`,
+          data: { key, chords, romanNumerals: ['I', 'V', 'vi', 'IV'] }
+        };
+      })
+    ]
+  }
+];
+
+// GRUPOS DE CADENCIAS CLÁSICAS
+const classicalCadenceGroups: QuestionGroup[] = [
+  {
+    id: 'classical-cadences',
+    name: 'Cadencias Clásicas',
+    description: 'Cadencias fundamentales de la música clásica: auténtica, plagal, rota, frigia',
+    category: 'progression-direct',
+    totalQuestions: 12,
+    questions: [
+      // Cadencias auténticas
+      ...['C', 'G', 'F', 'D'].map((key, index) => {
+        const chords = {
+          'C': ['G', 'C'],
+          'G': ['D', 'G'],
+          'F': ['C', 'F'],
+          'D': ['A', 'D']
+        }[key] || ['G', 'C'];
+        
+        const allAnswers = ['G - C', 'D - G', 'C - F', 'A - D', 'E - A', 'B - E', 'F - Bb'];
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `authentic-cadence-${key}-${index}`,
+          type: 'progression-direct' as const,
+          question: `Cadencia auténtica en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `La cadencia auténtica en ${key} es V-I: ${chords.join(' - ')}. Esta es la cadencia más fuerte y definitiva de la música tonal occidental. El movimiento V-I (${chords[0]} → ${chords[1]}) crea la máxima sensación de resolución debido al movimiento de la sensible (7º grado) hacia la tónica y la quinta del dominante hacia la fundamental de la tónica. Es la base del sistema tonal y se encuentra en prácticamente toda la música clásica, desde Bach hasta Brahms. La cadencia auténtica perfecta requiere que ambos acordes estén en posición fundamental y que la melodía vaya de la sensible a la tónica. Es el equivalente musical de un punto final en una oración.`,
+          data: { key, chords, romanNumerals: ['V', 'I'] }
+        };
+      }),
+      
+      // Cadencias plagales
+      ...['C', 'G', 'F', 'D'].map((key, index) => {
+        const chords = {
+          'C': ['F', 'C'],
+          'G': ['C', 'G'],
+          'F': ['Bb', 'F'],
+          'D': ['G', 'D']
+        }[key] || ['F', 'C'];
+        
+        const allAnswers = ['F - C', 'C - G', 'Bb - F', 'G - D', 'D - A', 'A - E', 'Eb - Bb'];
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `plagal-cadence-${key}-${index + 4}`,
+          type: 'progression-direct' as const,
+          question: `Cadencia plagal en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `La cadencia plagal en ${key} es IV-I: ${chords.join(' - ')}. También conocida como "cadencia del Amén" por su uso frecuente en música religiosa, especialmente al final de himnos. El movimiento IV-I (${chords[0]} → ${chords[1]}) es más suave que la cadencia auténtica, ya que no contiene la sensible. En su lugar, el movimiento característico es del 6º grado (que baja al 5º) y del 4º grado (que baja al 3º). Esta cadencia tiene un carácter más modal y arcaico, y se asocia con música sacra y folk. Es menos conclusiva que la cadencia auténtica pero igualmente satisfactoria, creando una sensación de paz y resolución tranquila.`,
+          data: { key, chords, romanNumerals: ['IV', 'I'] }
+        };
+      }),
+      
+      // Cadencias rotas
+      ...['C', 'G', 'F', 'D'].map((key, index) => {
+        const chords = {
+          'C': ['G', 'Am'],
+          'G': ['D', 'Em'],
+          'F': ['C', 'Dm'],
+          'D': ['A', 'Bm']
+        }[key] || ['G', 'Am'];
+        
+        const allAnswers = ['G - Am', 'D - Em', 'C - Dm', 'A - Bm', 'E - F#m', 'B - C#m', 'F - Gm'];
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `deceptive-cadence-${key}-${index + 8}`,
+          type: 'progression-direct' as const,
+          question: `Cadencia rota en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `La cadencia rota en ${key} es V-vi: ${chords.join(' - ')}. Esta cadencia "engaña" al oído porque después de escuchar el dominante (${chords[0]}), esperamos la resolución a la tónica (I), pero en su lugar va al vi grado (${chords[1]}). Es una técnica compositiva muy efectiva para extender una frase musical y crear sorpresa. El vi grado comparte dos notas con el I (la 3ª y 5ª del vi son la 1ª y 3ª del I), por lo que la resolución es parcialmente satisfactoria pero deja una sensación de continuidad. Se usa frecuentemente en música clásica y popular para evitar finales prematuros y mantener el interés musical. Bach la usaba magistralmente en sus corales.`,
+          data: { key, chords, romanNumerals: ['V', 'vi'] }
+        };
+      })
+    ]
+  }
+];
+
+// GRUPOS DE ARMONÍA AVANZADA
+const advancedHarmonyGroups: QuestionGroup[] = [
+  {
+    id: 'advanced-harmony',
+    name: 'Armonía Avanzada',
+    description: 'Intercambio modal, sustituciones tritónicas, mediante cromáticas',
+    category: 'progression-direct',
+    totalQuestions: 15,
+    questions: [
+      // Intercambio modal
+      ...['C', 'G', 'F', 'D', 'A'].map((key, index) => {
+        const chords = {
+          'C': ['Cmaj7', 'Abmaj7', 'Bb7', 'Cmaj7'],
+          'G': ['Gmaj7', 'Ebmaj7', 'F7', 'Gmaj7'],
+          'F': ['Fmaj7', 'Dbmaj7', 'Eb7', 'Fmaj7'],
+          'D': ['Dmaj7', 'Bbmaj7', 'C7', 'Dmaj7'],
+          'A': ['Amaj7', 'Fmaj7', 'G7', 'Amaj7']
+        }[key] || ['Cmaj7', 'Abmaj7', 'Bb7', 'Cmaj7'];
+        
+        const allAnswers = [
+          'Cmaj7 - Abmaj7 - Bb7 - Cmaj7',
+          'Gmaj7 - Ebmaj7 - F7 - Gmaj7',
+          'Fmaj7 - Dbmaj7 - Eb7 - Fmaj7',
+          'Dmaj7 - Bbmaj7 - C7 - Dmaj7',
+          'Amaj7 - Fmaj7 - G7 - Amaj7'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `modal-interchange-${key}-${index}`,
+          type: 'progression-direct' as const,
+          question: `Intercambio modal I-bVI-bVII-I en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `El intercambio modal en ${key} utiliza ${chords.join(' - ')}. Esta progresión toma acordes prestados del modo menor paralelo: I (${chords[0]}, tónica mayor) - bVI (${chords[1]}, prestado del menor) - bVII (${chords[2]}, prestado del menor) - I (${chords[3]}, vuelta a la tónica). El bVI y bVII son acordes que no existen en la escala mayor natural de ${key}, sino que provienen de ${key} menor. Esta técnica, llamada intercambio modal o acordes prestados, enriquece enormemente el vocabulario armónico y se usa extensivamente en música popular desde los Beatles hasta el jazz moderno. Los acordes prestados aportan colores armónicos únicos y permiten modulaciones suaves entre modos mayor y menor.`,
+          data: { key, chords, romanNumerals: ['Imaj7', 'bVImaj7', 'bVII7', 'Imaj7'] }
+        };
+      }),
+      
+      // Sustituciones tritónicas
+      ...['C', 'F', 'G', 'Bb', 'D'].map((key, index) => {
+        const chords = {
+          'C': ['Dm7', 'Db7', 'Cmaj7'],
+          'F': ['Gm7', 'Gb7', 'Fmaj7'],
+          'G': ['Am7', 'Ab7', 'Gmaj7'],
+          'Bb': ['Cm7', 'B7', 'Bbmaj7'],
+          'D': ['Em7', 'Eb7', 'Dmaj7']
+        }[key] || ['Dm7', 'Db7', 'Cmaj7'];
+        
+        const allAnswers = [
+          'Dm7 - Db7 - Cmaj7',
+          'Gm7 - Gb7 - Fmaj7',
+          'Am7 - Ab7 - Gmaj7',
+          'Cm7 - B7 - Bbmaj7',
+          'Em7 - Eb7 - Dmaj7'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `tritone-substitution-${key}-${index + 5}`,
+          type: 'progression-direct' as const,
+          question: `ii-bII-I (sustitución tritónica) en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `La sustitución tritónica en ${key} es ${chords.join(' - ')}. En lugar del dominante natural (G7 en C), se usa ${chords[1]} que está a un tritono de distancia. La sustitución tritónica funciona porque ambos acordes comparten las mismas tensiones críticas: la 3ª y 7ª del dominante original se convierten en la 7ª y 3ª del sustituto. Por ejemplo, en C: G7 tiene B (3ª) y F (7ª), mientras que Db7 tiene F (3ª) y B (7ª). Esta sustitución crea un movimiento cromático descendente en el bajo (D-Db-C) que es muy elegante. Es fundamental en el jazz moderno y permite rearmonizaciones sofisticadas. El efecto es más suave que el dominante original pero igualmente funcional.`,
+          data: { key, chords, romanNumerals: ['iim7', 'bII7', 'Imaj7'] }
+        };
+      }),
+      
+      // Mediante cromáticas
+      ...['C', 'G', 'F', 'D', 'A'].map((key, index) => {
+        const chords = {
+          'C': ['Cmaj7', 'Ebmaj7', 'Cmaj7'],
+          'G': ['Gmaj7', 'Bbmaj7', 'Gmaj7'],
+          'F': ['Fmaj7', 'Abmaj7', 'Fmaj7'],
+          'D': ['Dmaj7', 'Fmaj7', 'Dmaj7'],
+          'A': ['Amaj7', 'Cmaj7', 'Amaj7']
+        }[key] || ['Cmaj7', 'Ebmaj7', 'Cmaj7'];
+        
+        const allAnswers = [
+          'Cmaj7 - Ebmaj7 - Cmaj7',
+          'Gmaj7 - Bbmaj7 - Gmaj7',
+          'Fmaj7 - Abmaj7 - Fmaj7',
+          'Dmaj7 - Fmaj7 - Dmaj7',
+          'Amaj7 - Cmaj7 - Amaj7'
+        ];
+        
+        const wrongOptions = generateWrongOptions(chords.join(' - '), allAnswers);
+        const options = shuffleOptions(chords.join(' - '), wrongOptions);
+        
+        return {
+          id: `chromatic-mediant-${key}-${index + 10}`,
+          type: 'progression-direct' as const,
+          question: `Mediante cromática I-bIII-I en ${key}`,
+          answer: chords.join(' - '),
+          options,
+          explanation: `La mediante cromática en ${key} es ${chords.join(' - ')}. Esta progresión utiliza el bIII (${chords[1]}) como acorde de paso entre dos acordes de tónica. La mediante cromática es una relación armónica donde los acordes están separados por una tercera menor y comparten una nota común. En este caso, ${chords[0]} y ${chords[1]} comparten la nota G (5ª de C y 3ª de Eb). Esta técnica crea un efecto de color armónico muy distintivo, usado frecuentemente por compositores románticos como Schubert y Chopin, y también en música popular moderna. El movimiento cromático en el bajo (C-Eb-C) y la nota común crean una sonoridad rica y expresiva que expande el vocabulario armónico tradicional.`,
+          data: { key, chords, romanNumerals: ['Imaj7', 'bIIImaj7', 'Imaj7'] }
+        };
+      })
+    ]
+  }
+];
+
+// NUEVOS GRUPOS DE ESCALAS MENORES
+const minorScaleGroups: QuestionGroup[] = [
+  {
+    id: 'minor-scales-modes',
+    name: 'Escalas Menores y sus Modos',
+    description: 'Escalas menor natural, armónica, melódica y todos sus modos',
+    category: 'scale-mode',
+    totalQuestions: 15,
+    questions: [
+      // Menor natural y sus modos
+      ...scales.filter(s => ['a-natural-minor', 'b-locrian', 'c-ionian'].includes(s.id)).map((scale, index) => {
+        const allConnections = [
+          'Am7, Am6 (vi grado de C mayor)', 'Bm7b5 (vii grado de C mayor)', 'Cmaj7 (I grado)',
+          'Dm7 (ii grado)', 'Em7 (iii grado)', 'Fmaj7 (IV grado)', 'G7 (V grado)'
+        ];
+        const wrongOptions = generateWrongOptions(scale.chordConnection!, allConnections);
+        const options = shuffleOptions(scale.chordConnection!, wrongOptions);
+        
+        return {
+          id: `minor-natural-${scale.id}-${index}`,
+          type: 'scale-mode' as const,
+          question: `¿Sobre qué contexto armónico se usa ${scale.name}?`,
+          answer: scale.chordConnection!,
+          options,
+          explanation: `${scale.name} se usa sobre ${scale.chordConnection}. Esta escala (${scale.notes.join(' - ')}) es parte del sistema modal derivado de la escala mayor. ${scale.mode ? `Como modo ${scale.mode}, ` : ''}su característica distintiva es ${getMinorScaleCharacteristic(scale.name)}. En el contexto de la escala mayor de C, cada modo tiene su función específica y color armónico único, siendo fundamental para entender tanto la música clásica como el jazz modal.`,
+          data: scale
+        };
+      }),
+      
+      // Menor armónica y sus modos
+      ...scales.filter(s => ['a-harmonic-minor', 'e-phrygian-dominant', 'c-ionian-sharp5'].includes(s.id)).map((scale, index) => {
+        const allConnections = [
+          'Am(maj7), E7alt', 'E7b9 (V de Am armónica)', 'Cmaj7#5',
+          'Dm7#11', 'Fmaj7#11#9', 'G#dim7'
+        ];
+        const wrongOptions = generateWrongOptions(scale.chordConnection!, allConnections);
+        const options = shuffleOptions(scale.chordConnection!, wrongOptions);
+        
+        return {
+          id: `harmonic-minor-${scale.id}-${index + 3}`,
+          type: 'scale-mode' as const,
+          question: `¿En qué contexto armónico se usa ${scale.name}?`,
+          answer: scale.chordConnection!,
+          options,
+          explanation: `${scale.name} se usa sobre ${scale.chordConnection}. Esta escala (${scale.notes.join(' - ')}) pertenece al sistema de la menor armónica, caracterizado por el intervalo de segunda aumentada entre el 6º y 7º grados. ${scale.mode ? `El modo ${scale.mode} ` : ''}${getHarmonicMinorExplanation(scale.name)}. La menor armónica es fundamental en música clásica, flamenco y jazz, proporcionando el dominante mayor (V7) en tonalidades menores.`,
+          data: scale
+        };
+      }),
+      
+      // Menor melódica y sus modos
+      ...scales.filter(s => ['a-melodic-minor', 'c-lydian-augmented', 'd-lydian-dominant', 'gs-super-locrian'].includes(s.id)).map((scale, index) => {
+        const allConnections = [
+          'Am(maj7), mM7', 'Cmaj7#5#11', 'D7#11', 'G#7alt'
+        ];
+        const wrongOptions = generateWrongOptions(scale.chordConnection!, allConnections);
+        const options = shuffleOptions(scale.chordConnection!, wrongOptions);
+        
+        return {
+          id: `melodic-minor-${scale.id}-${index + 6}`,
+          type: 'scale-mode' as const,
+          question: `¿Qué escala se usa sobre ${scale.chordConnection}?`,
+          answer: scale.name,
+          options: shuffleOptions(scale.name, generateWrongOptions(scale.name, scales.filter(s => s.id.includes('melodic') || s.id.includes('lydian') || s.id.includes('super')).map(s => s.name))),
+          explanation: `Sobre ${scale.chordConnection} se usa ${scale.name}. Esta escala (${scale.notes.join(' - ')}) es parte del sistema de menor melódica, que ${getMelodicMinorExplanation(scale.name)}. La menor melódica y sus modos son fundamentales en jazz moderno, proporcionando sonoridades sofisticadas para acordes alterados y extensiones complejas.`,
+          data: scale
+        };
+      }),
+      
+      // Identificar escalas por notas
+      ...scales.filter(s => ['a-harmonic-minor', 'a-melodic-minor', 'e-phrygian-dominant', 'd-lydian-dominant'].includes(s.id)).map((scale, index) => {
+        const allScaleNames = [
+          'A Menor Armónica', 'A Menor Melódica', 'E Frigio Dominante', 'D Lidio Dominante',
+          'A Menor Natural', 'C Mayor', 'G Mixolidio'
+        ];
+        const wrongOptions = generateWrongOptions(scale.name, allScaleNames);
+        const options = shuffleOptions(scale.name, wrongOptions);
+        
+        return {
+          id: `identify-minor-scale-${scale.id}-${index + 10}`,
+          type: 'scale-mode' as const,
+          question: `¿Qué escala contiene estas notas?\n${scale.notes.join(' - ')}`,
+          answer: scale.name,
+          options,
+          explanation: `Las notas ${scale.notes.join(' - ')} corresponden a ${scale.name}. ${getScaleIdentificationExplanation(scale.name, scale.notes)}. Esta escala es fundamental para entender la armonía menor avanzada y se usa extensivamente en ${getStyleContext(scale.name)}.`,
+          data: scale
+        };
+      }),
+      
+      // Pregunta adicional sobre características modales
+      {
+        id: 'minor-scale-theory-15',
+        type: 'scale-mode' as const,
+        question: '¿Cuál es la principal diferencia entre la escala menor natural y la menor armónica?',
+        answer: 'La menor armónica tiene la 7ª mayor, creando el intervalo de 2ª aumentada',
+        options: [
+          'La menor armónica tiene la 7ª mayor, creando el intervalo de 2ª aumentada',
+          'La menor armónica tiene la 6ª mayor en lugar de menor',
+          'La menor armónica tiene la 4ª aumentada como característica principal'
+        ],
+        explanation: 'La diferencia fundamental entre la menor natural y la menor armónica es el 7º grado: la menor natural tiene 7ª menor (G en A menor) mientras que la menor armónica tiene 7ª mayor (G# en A menor). Esto crea el característico intervalo de segunda aumentada entre el 6º y 7º grados (F-G#), que le da su sonoridad exótica. Esta 7ª mayor permite formar el acorde de dominante mayor (E7 en A menor) que resuelve fuertemente a la tónica menor, algo imposible con la menor natural que solo produce un dominante menor (Em7).',
+        data: { concept: 'minor-scale-theory' }
+      }
+    ]
+  }
+];
+
+// GRUPOS DE ESCALAS PENTATÓNICAS
+const pentatonicScaleGroups: QuestionGroup[] = [
+  {
+    id: 'pentatonic-scales',
+    name: 'Escalas Pentatónicas',
+    description: 'Pentatónicas mayor, menor y blues en todas las tonalidades',
+    category: 'scale-mode',
+    totalQuestions: 15,
+    questions: [
+      // Pentatónicas mayores
+      ...scales.filter(s => s.id.includes('pentatonic-major')).slice(0, 5).map((scale, index) => {
+        const allConnections = [
+          'Cmaj7, C6', 'Gmaj7, G6', 'Dmaj7, D6', 'Amaj7, A6', 'Emaj7, E6',
+          'Fmaj7, F6', 'Bbmaj7, Bb6', 'Ebmaj7, Eb6'
+        ];
+        const wrongOptions = generateWrongOptions(scale.chordConnection!, allConnections);
+        const options = shuffleOptions(scale.chordConnection!, wrongOptions);
+        
+        return {
+          id: `pentatonic-major-${scale.id}-${index}`,
+          type: 'scale-mode' as const,
+          question: `¿Sobre qué acordes se usa ${scale.name}?`,
+          answer: scale.chordConnection!,
+          options,
+          explanation: `${scale.name} se usa sobre ${scale.chordConnection}. Esta escala pentatónica (${scale.notes.join(' - ')}) elimina los semitonos de la escala mayor, creando una sonoridad abierta y consonante. Las pentatónicas mayores son perfectas para improvisación sobre acordes mayores porque evitan las notas que podrían crear disonancias (4ª y 7ª mayor). Se usan extensivamente en rock, blues, country, música asiática y prácticamente todos los estilos musicales. Su simplicidad las hace ideales para principiantes, pero su expresividad las mantiene relevantes en todos los niveles musicales.`,
+          data: scale
+        };
+      }),
+      
+      // Pentatónicas menores
+      ...scales.filter(s => s.id.includes('pentatonic-minor')).slice(0, 5).map((scale, index) => {
+        const allConnections = [
+          'Am7, Am6', 'Em7, Em6', 'Bm7, Bm6', 'F#m7, F#m6', 'C#m7, C#m6',
+          'Dm7, Dm6', 'Gm7, Gm6', 'Cm7, Cm6'
+        ];
+        const wrongOptions = generateWrongOptions(scale.chordConnection!, allConnections);
+        const options = shuffleOptions(scale.chordConnection!, wrongOptions);
+        
+        return {
+          id: `pentatonic-minor-${scale.id}-${index + 5}`,
+          type: 'scale-mode' as const,
+          question: `¿En qué contexto armónico se usa ${scale.name}?`,
+          answer: scale.chordConnection!,
+          options,
+          explanation: `${scale.name} se usa sobre ${scale.chordConnection}. Esta escala (${scale.notes.join(' - ')}) es la relativa menor de la pentatónica mayor, eliminando la 2ª y 6ª de la escala menor natural. Es fundamental en blues, rock, jazz y música folk. Su sonoridad melancólica pero accesible la hace perfecta para expresar emociones profundas sin complejidad técnica. Guitarristas como B.B. King, Eric Clapton y Jimmy Page la han usado como base de su vocabulario improvisatorio. La ausencia de semitonos la hace muy segura para la improvisación.`,
+          data: scale
+        };
+      }),
+      
+      // Pentatónicas blues
+      ...scales.filter(s => s.id.includes('pentatonic-blues')).slice(0, 5).map((scale, index) => {
+        const allConnections = [
+          'C7, blues en C', 'G7, blues en G', 'F7, blues en F', 'Bb7, blues en Bb', 'E7, blues en E'
+        ];
+        const wrongOptions = generateWrongOptions(scale.chordConnection!, allConnections);
+        const options = shuffleOptions(scale.chordConnection!, wrongOptions);
+        
+        return {
+          id: `pentatonic-blues-${scale.id}-${index + 10}`,
+          type: 'scale-mode' as const,
+          question: `¿Qué escala contiene estas notas?\n${scale.notes.join(' - ')}`,
+          answer: scale.name,
+          options: shuffleOptions(scale.name, generateWrongOptions(scale.name, scales.filter(s => s.id.includes('blues') || s.id.includes('pentatonic')).map(s => s.name))),
+          explanation: `Las notas ${scale.notes.join(' - ')} corresponden a ${scale.name}. Esta escala añade la "blue note" (b5 o #4) a la pentatónica menor, creando la escala de 6 notas más característica del blues. La blue note (${scale.notes[3]}) es la que da el color distintivo del blues, creando tensión contra la quinta justa. Esta escala es la base del blues, rock, jazz y R&B. Su poder expresivo viene de la tensión entre las notas "seguras" de la pentatónica y la disonancia controlada de la blue note.`,
+          data: scale
+        };
+      })
+    ]
+  }
+];
+
 // Funciones auxiliares para explicaciones
 function getModeCharacteristic(mode: string): string {
   const characteristics = {
@@ -491,5 +1110,88 @@ function getEthnicScaleExplanation(scaleName: string): string {
 export const questionGroups: QuestionGroup[] = [
   ...progressionDirectGroups,
   ...progressionInverseGroups,
-  ...scaleModeGroups
+  ...scaleModeGroups,
+  // Añadir todos los nuevos grupos
+  ...bluesProgressionGroups,
+  ...modalProgressionGroups,
+  ...rockPopProgressionGroups,
+  ...classicalCadenceGroups,
+  ...advancedHarmonyGroups,
+  ...minorScaleGroups,
+  ...pentatonicScaleGroups
 ];
+
+// Funciones auxiliares para explicaciones detalladas
+function getMinorScaleCharacteristic(scaleName: string): string {
+  if (scaleName.includes('Menor Natural') || scaleName.includes('Eólico')) {
+    return 'su sonoridad menor melancólica con todos los intervalos naturales';
+  }
+  if (scaleName.includes('Locrio')) {
+    return 'su 5ª disminuida que lo hace muy inestable y disonante, usado raramente como centro tonal';
+  }
+  if (scaleName.includes('Jónico') || scaleName.includes('Mayor')) {
+    return 'su sonoridad mayor brillante y estable, siendo el modo más consonante';
+  }
+  return 'sus intervalos característicos que definen su color modal único';
+}
+
+function getHarmonicMinorExplanation(scaleName: string): string {
+  if (scaleName.includes('Menor Armónica')) {
+    return 'es la escala menor con 7ª mayor, creando el dominante mayor necesario para cadencias fuertes en menor';
+  }
+  if (scaleName.includes('Frigio Dominante')) {
+    return 'combina la 2ª menor del frigio con la 3ª mayor, típico del flamenco y música del Medio Oriente';
+  }
+  if (scaleName.includes('Jónico #5')) {
+    return 'tiene la 5ª aumentada que crea una sonoridad mayor pero con tensión armónica';
+  }
+  return 'aporta colores armónicos únicos derivados de la menor armónica';
+}
+
+function getMelodicMinorExplanation(scaleName: string): string {
+  if (scaleName.includes('Menor Melódica')) {
+    return 'tiene 6ª y 7ª mayores, eliminando el intervalo de 2ª aumentada de la menor armónica';
+  }
+  if (scaleName.includes('Lidio Aumentado')) {
+    return 'combina la 4ª aumentada del lidio con la 5ª aumentada, creando una sonoridad muy etérea';
+  }
+  if (scaleName.includes('Lidio Dominante')) {
+    return 'tiene 4ª aumentada sobre un acorde dominante, muy usado en jazz para V7#11';
+  }
+  if (scaleName.includes('Super Locrio') || scaleName.includes('Alterada')) {
+    return 'contiene todas las alteraciones posibles (b9, #9, #11, b13), perfecta para acordes dominantes alterados';
+  }
+  return 'proporciona sonoridades sofisticadas para armonía jazz avanzada';
+}
+
+function getScaleIdentificationExplanation(scaleName: string, notes: string[]): string {
+  if (scaleName.includes('Menor Armónica')) {
+    return `La característica clave es el intervalo de 2ª aumentada entre ${notes[5]} y ${notes[6]}, típico de la menor armónica`;
+  }
+  if (scaleName.includes('Menor Melódica')) {
+    return `Se distingue por tener 6ª y 7ª mayores (${notes[5]} y ${notes[6]}), a diferencia de la menor natural`;
+  }
+  if (scaleName.includes('Frigio Dominante')) {
+    return `La combinación de 2ª menor (${notes[1]}) y 3ª mayor (${notes[2]}) es característica del frigio dominante`;
+  }
+  if (scaleName.includes('Lidio Dominante')) {
+    return `La 4ª aumentada (${notes[3]}) y 7ª menor (${notes[6]}) definen el lidio dominante`;
+  }
+  return 'Sus intervalos característicos la distinguen de otras escalas menores';
+}
+
+function getStyleContext(scaleName: string): string {
+  if (scaleName.includes('Menor Armónica')) {
+    return 'música clásica, flamenco, tango y jazz tradicional';
+  }
+  if (scaleName.includes('Menor Melódica')) {
+    return 'jazz moderno, música clásica del s.XIX y composición contemporánea';
+  }
+  if (scaleName.includes('Frigio Dominante')) {
+    return 'flamenco, música árabe, metal progresivo y jazz fusion';
+  }
+  if (scaleName.includes('Lidio Dominante')) {
+    return 'jazz moderno, fusion y música de los años 70';
+  }
+  return 'diversos estilos musicales según su sonoridad característica';
+}
