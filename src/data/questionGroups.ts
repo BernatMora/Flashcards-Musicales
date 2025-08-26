@@ -580,4 +580,11 @@ const ethnicProgressionGroup: QuestionGroup = {
   ]
 };
 
+// Export all question groups as an array
+export const questionGroups = [
+  basicProgressionGroup,
+  advancedProgressionGroup,
+  ethnicProgressionGroup
+];
+
 export { basicProgressionGroup, advancedProgressionGroup, ethnicProgressionGroup };
