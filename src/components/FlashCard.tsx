@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { FlashCard as FlashCardType, QuizResult } from '../types/music';
-import { CheckCircle, XCircle, RotateCcw, ArrowRight } from 'lucide-react';
+import { CheckCircle, XCircle, RotateCcw, ArrowRight, ArrowLeft } from 'lucide-react';
 
 interface FlashCardProps {
   card: FlashCardType;
   onAnswer: (result: QuizResult) => void;
   onNext: () => void;
+  onBack?: () => void;
 }
 
-export default function FlashCard({ card, onAnswer, onNext }: FlashCardProps) {
+export default function FlashCard({ card, onAnswer, onNext, onBack }: FlashCardProps) {
   const [userAnswer, setUserAnswer] = useState('');
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState<QuizResult | null>(null);
@@ -83,19 +84,42 @@ export default function FlashCard({ card, onAnswer, onNext }: FlashCardProps) {
           </div>
         </div>
 
+        <div className="flex gap-3">
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Volver al menú
+            </button>
+          )}
         <button
           onClick={handleNext}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
         >
           Siguiente
           <ArrowRight className="w-5 h-5" />
         </button>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
+      {onBack && (
+        <div className="mb-4">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Volver al menú
+          </button>
+        </div>
+      )}
+      
       <div className="mb-6">
         <div className="text-sm text-blue-600 font-medium mb-2">
           {card.type === 'progression-direct' && 'Números Romanos → Acordes'}

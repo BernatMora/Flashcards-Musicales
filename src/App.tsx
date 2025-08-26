@@ -117,6 +117,7 @@ export default function App() {
                 card={getCurrentCard()!}
                 onAnswer={handleAnswer}
                 onNext={handleNext}
+                onBack={handleBack}
               />
             )}
           </div>
