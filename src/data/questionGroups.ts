@@ -443,7 +443,7 @@ const modalScalesGroup: QuestionGroup = {
       answer: 'Frigio dominante (5º modo de la menor armónica)',
       options: ['Frigio natural', 'Frigio dominante (5º modo de la menor armónica)', 'Dórico', 'Menor armónica'],
       explanation: 'El Raga Bhairav (C-Db-E-F-G-Ab-B) corresponde al frigio dominante occidental. La 3ª mayor (E) es característica distintiva.',
-      data: { origin: 'indian-classical', raga: 'bhairav', western-equivalent: 'phrygian-dominant' }
+      data: { origin: 'indian-classical', raga: 'bhairav', 'western-equivalent': 'phrygian-dominant' }
     },
 
     // Ejercicio 9: Modo en música electrónica
