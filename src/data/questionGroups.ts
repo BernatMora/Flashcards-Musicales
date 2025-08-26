@@ -12,10 +12,10 @@ const basicProgressionGroup: QuestionGroup = {
     {
       id: 'classical-cadence-1',
       type: 'progression-direct',
-      question: 'En una sonata clásica en Do mayor, ¿qué acordes forman una cadencia auténtica?',
+      question: 'En el primer movimiento de una sonata de Mozart en Do mayor, ¿qué cadencia confirma la tonalidad en la exposición?',
       answer: 'G7 - Cmaj7',
       options: ['G7 - Cmaj7', 'F - Cmaj7', 'Am - Cmaj7', 'Dm7 - G7'],
-      explanation: 'La cadencia auténtica V-I es fundamental en el estilo clásico. G7 (dominante) resuelve a Cmaj7 (tónica) creando la tensión-resolución característica.',
+      explanation: 'En el estilo clásico de Mozart, la cadencia auténtica V-I (G7-Cmaj7) es esencial para confirmar la tonalidad principal en la exposición de una sonata.',
       data: { key: 'C', style: 'classical', context: 'sonata' }
     },
     
@@ -23,10 +23,10 @@ const basicProgressionGroup: QuestionGroup = {
     {
       id: 'jazz-ii-v-i-1',
       type: 'progression-direct',
-      question: 'En un estándar de jazz en Bb, ¿cómo se armoniza típicamente ii-V-I con extensiones?',
+      question: 'En "Autumn Leaves" (compás 5-7), ¿cómo se enriquece el ii-V-I en Bb con tensiones modernas?',
       answer: 'Cm11 - F13 - Bbmaj9',
       options: ['Cm11 - F13 - Bbmaj9', 'Cm7 - F7 - Bbmaj7', 'Dm7 - G7 - Cmaj7', 'Gm7 - C7 - Fmaj7'],
-      explanation: 'En jazz, el ii-V-I se enriquece con extensiones: Cm11 (ii), F13 (V) y Bbmaj9 (I). Estas tensiones añaden color armónico sin alterar la función básica.',
+      explanation: 'En "Autumn Leaves", el ii-V-I se sofistica con Cm11 (añade 11ª), F13 (tensión 13ª) y Bbmaj9 (9ª mayor), creando el color jazz moderno.',
       data: { key: 'Bb', style: 'jazz', extensions: true }
     },
 
@@ -34,10 +34,10 @@ const basicProgressionGroup: QuestionGroup = {
     {
       id: 'dorian-vamp-1',
       type: 'progression-direct',
-      question: 'En una improvisación modal en Re dórico, ¿qué vamp de 2 acordes es más característico?',
+      question: 'En "So What" de Miles Davis (sección A), ¿qué vamp modal define el carácter de la pieza?',
       answer: 'Dm7 - Gmaj7',
       options: ['Dm7 - Gmaj7', 'Dm7 - Am7', 'Em7 - Am7', 'Dm7 - Bb7'],
-      explanation: 'El vamp Dm7-Gmaj7 es típico del modo dórico. El Gmaj7 (IV mayor) es la nota característica que distingue el dórico del menor natural.',
+      explanation: 'En "So What", el vamp Dm7-Gmaj7 establece Re dórico. El Gmaj7 (IV mayor) con su Si natural es la nota característica que define este modo.',
       data: { key: 'D', mode: 'dorian', type: 'vamp' }
     },
 
@@ -45,10 +45,10 @@ const basicProgressionGroup: QuestionGroup = {
     {
       id: 'blues-substitution-1',
       type: 'progression-direct',
-      question: 'En un blues en Mi con sustituciones jazz, ¿cómo se puede reemplazar el V7 del compás 9?',
+      question: 'En "Stormy Monday" (compás 9), ¿qué sustitución crea el movimiento cromático descendente característico?',
       answer: 'Bb7 (sustitución tritónica)',
       options: ['Bb7 (sustitución tritónica)', 'B7 (dominante)', 'A7 (IV7)', 'F#7 (ii7)'],
-      explanation: 'Bb7 es la sustitución tritónica de B7. Ambos acordes comparten el tritono (D#-A) pero Bb7 crea un movimiento cromático descendente más suave.',
+      explanation: 'En "Stormy Monday", Bb7 sustituye a B7 (ambos comparten el tritono D#-A), pero Bb7 crea el movimiento cromático Bb-A-G# típico del blues jazz.',
       data: { key: 'E', style: 'blues', substitution: 'tritone' }
     },
 
@@ -56,10 +56,10 @@ const basicProgressionGroup: QuestionGroup = {
     {
       id: 'pop-modal-interchange-1',
       type: 'progression-direct',
-      question: 'En una balada pop en La mayor, ¿qué acorde prestado del menor paralelo es más común en la progresión I-?-vi-IV?',
+      question: 'En "Let It Be" de The Beatles (estrofa), ¿qué acorde prestado crea el efecto melancólico en la progresión?',
       answer: 'F (bVI)',
       options: ['F (bVI)', 'G (bVII)', 'D (IV)', 'C (bIII)'],
-      explanation: 'El bVI (F en La mayor) es un acorde prestado del menor paralelo muy usado en pop. Crea una sonoridad melancólica característica en I-bVI-vi-IV.',
+      explanation: 'En "Let It Be", el F (bVI en La mayor) es prestado del menor paralelo. Este acorde crea la sonoridad melancólica característica de las baladas pop.',
       data: { key: 'A', style: 'pop', technique: 'modal-interchange' }
     },
 
@@ -67,10 +67,10 @@ const basicProgressionGroup: QuestionGroup = {
     {
       id: 'compound-meter-1',
       type: 'progression-direct',
-      question: 'En una balada irlandesa en 6/8 en Sol mayor, ¿qué progresión de 4 acordes es típica?',
+      question: 'En "Danny Boy" (compás 1-4), ¿qué progresión en 6/8 establece el carácter irlandés?',
       answer: 'G - Em - C - D',
       options: ['G - Em - C - D', 'G - Am - F - C', 'G - Bm - Em - Am', 'G - F - C - G'],
-      explanation: 'I-vi-IV-V es una progresión clásica en música celta. En 6/8, cada acorde dura típicamente 2 tiempos (una negra con puntillo).',
+      explanation: 'En "Danny Boy", la progresión I-vi-IV-V (G-Em-C-D) en 6/8 crea el carácter irlandés. Cada acorde dura 2 tiempos (negra con puntillo).',
       data: { key: 'G', meter: '6/8', style: 'celtic' }
     },
 
@@ -78,10 +78,10 @@ const basicProgressionGroup: QuestionGroup = {
     {
       id: 'secondary-dominants-1',
       type: 'progression-direct',
-      question: 'En Do mayor, ¿qué dominante secundario precede típicamente al acorde de Am7?',
+      question: 'En "All The Things You Are" (compás 7), ¿qué dominante secundario intensifica la llegada a Am7?',
       answer: 'E7 (V7/vi)',
       options: ['E7 (V7/vi)', 'A7 (V7/ii)', 'B7 (V7/iii)', 'D7 (V7/V)'],
-      explanation: 'E7 es el V7/vi (dominante del vi grado). La alteración G# crea una fuerte tendencia hacia Am7, intensificando la resolución.',
+      explanation: 'En "All The Things You Are", E7 (V7/vi) con su G# crea una fuerte atracción hacia Am7, intensificando la resolución melódica y armónica.',
       data: { key: 'C', technique: 'secondary-dominant', target: 'vi' }
     },
 
@@ -89,10 +89,10 @@ const basicProgressionGroup: QuestionGroup = {
     {
       id: 'neosoul-slash-1',
       type: 'progression-direct',
-      question: 'En un groove neosoul en Fa mayor, ¿cómo se puede enriquecer el acorde de Bb con un bajo alternativo?',
+      question: 'En el estilo de D\'Angelo, ¿cómo se enriquece un acorde de Bb para crear movimiento melódico en el bajo?',
       answer: 'Bb/D (primera inversión)',
       options: ['Bb/D (primera inversión)', 'Bb/F (segunda inversión)', 'Bb/A (bajo cromático)', 'Bb/C (cuarta suspendida)'],
-      explanation: 'Bb/D crea una línea de bajo más melódica y suave. La primera inversión es común en neosoul para crear movimiento armónico fluido.',
+      explanation: 'En el neosoul de D\'Angelo, Bb/D crea líneas de bajo melódicas. La primera inversión genera movimiento fluido típico del género.',
       data: { key: 'F', style: 'neosoul', technique: 'slash-chords' }
     },
 
@@ -100,10 +100,10 @@ const basicProgressionGroup: QuestionGroup = {
     {
       id: 'flamenco-progression-1',
       type: 'progression-direct',
-      question: 'En el modo frigio de Mi (flamenco), ¿qué progresión de 4 acordes es más auténtica?',
+      question: 'En una Soleá por bulerías, ¿qué progresión flamenca establece el compás de 12 tiempos?',
       answer: 'Em - F - G - F',
       options: ['Em - F - G - F', 'Em - Am - B7 - Em', 'Em - C - G - D', 'Em - Dm - Am - Em'],
-      explanation: 'Em-F-G-F es típica del flamenco. El F (bII) es característico del modo frigio, creando la sonoridad española distintiva.',
+      explanation: 'En Soleá por bulerías, Em-F-G-F establece el modo frigio. El F (bII) es esencial para la cadencia andaluza del flamenco.',
       data: { key: 'E', mode: 'phrygian', style: 'flamenco' }
     },
 
