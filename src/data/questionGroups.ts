@@ -213,7 +213,7 @@ const advancedProgressionGroup: QuestionGroup = {
       answer: 'Cromatismo paralelo (planing)',
       options: ['Cromatismo paralelo (planing)', 'Modulación por quintas', 'Intercambio modal', 'Sustitución tritónica'],
       explanation: 'Los acordes mayores se mueven cromáticamente manteniendo la misma estructura. Esta técnica (planing) es común en impresionismo y jazz moderno.',
-      data: { technique: 'chromatic-planing', chord-type: 'major7' }
+      data: { technique: 'chromatic-planing', 'chord-type': 'major7' }
     },
 
     // Ejercicio 4: Identificar forma musical
