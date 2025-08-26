@@ -1,8 +1,8 @@
 import React from 'react';
-import { Music, ArrowRightLeft, Scale, Settings } from 'lucide-react';
+import { Music, ArrowRightLeft, Scale } from 'lucide-react';
 
 interface QuizSelectorProps {
-  onSelectQuiz: (type: 'progression-direct' | 'progression-inverse' | 'scale-mode', withSettings?: boolean) => void;
+  onSelectQuiz: (type: 'progression-direct' | 'progression-inverse' | 'scale-mode') => void;
 }
 
 export default function QuizSelector({ onSelectQuiz }: QuizSelectorProps) {
@@ -29,8 +29,7 @@ export default function QuizSelector({ onSelectQuiz }: QuizSelectorProps) {
       description: 'Relaciona escalas con acordes y modos musicales',
       icon: Scale,
       color: 'from-purple-500 to-purple-600',
-      example: 'Mixolidio → G7',
-      hasSettings: true
+      example: 'Mixolidio → G7'
     }
   ];
 
@@ -47,7 +46,7 @@ export default function QuizSelector({ onSelectQuiz }: QuizSelectorProps) {
           return (
             <button
               key={quiz.type}
-              onClick={() => onSelectQuiz(quiz.type, false)}
+              onClick={() => onSelectQuiz(quiz.type)}
               className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
               <div className={`bg-gradient-to-r ${quiz.color} p-6`}>
@@ -60,18 +59,6 @@ export default function QuizSelector({ onSelectQuiz }: QuizSelectorProps) {
                   <p className="text-sm text-gray-500 font-medium">Ejemplo:</p>
                   <p className="text-sm text-gray-700">{quiz.example}</p>
                 </div>
-                {quiz.hasSettings && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectQuiz(quiz.type, true);
-                    }}
-                    className="mt-3 w-full flex items-center justify-center gap-2 px-3 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors"
-                  >
-                    <Settings className="w-4 h-4" />
-                    Seleccionar escalas
-                  </button>
-                )}
               </div>
             </button>
           );
