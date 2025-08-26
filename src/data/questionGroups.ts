@@ -583,8 +583,231 @@ const ethnicProgressionGroup: QuestionGroup = {
 // Export all question groups as an array
 export const questionGroups = [
   basicProgressionGroup,
-  advancedProgressionGroup,
+  inverseProgressionGroup,
+  scaleModeGroup
+];
+  basicProgressionGroup,
+export { basicProgressionGroup, inverseProgressionGroup, scaleModeGroup };
   ethnicProgressionGroup
 ];
 
+// GRUPO 2: PROGRESIONES INVERSAS - IDENTIFICACIÓN
+const inverseProgressionGroup: QuestionGroup = {
+  id: 'inverse-progressions',
+  name: 'Identificación de Progresiones',
+  description: 'Identifica progresiones y tonalidades a partir de secuencias de acordes',
+  category: 'progression-inverse',
+  totalQuestions: 10,
+  questions: [
+    {
+      id: 'identify-ii-v-i-1',
+      type: 'progression-inverse',
+      question: 'Dm7 - G7 - Cmaj7',
+      answer: 'ii-V-I en Do mayor',
+      options: ['ii-V-I en Do mayor', 'vi-ii-V en Fa mayor', 'iii-VI-I en Bb mayor', 'i-IV-VII en Re menor'],
+      explanation: 'Dm7-G7-Cmaj7 es el clásico ii-V-I en Do mayor. Dm7 es el ii grado, G7 el V grado dominante, y Cmaj7 la tónica.',
+      data: { key: 'C', progression: 'ii-V-I', function: 'cadential' }
+    },
+    {
+      id: 'identify-vi-iv-i-v-1',
+      type: 'progression-inverse',
+      question: 'Am - F - C - G',
+      answer: 'vi-IV-I-V en Do mayor',
+      options: ['vi-IV-I-V en Do mayor', 'i-bVI-bIII-bVII en La menor', 'ii-bVII-IV-I en Sol mayor', 'iii-I-V-ii en Fa mayor'],
+      explanation: 'Am-F-C-G es la progresión vi-IV-I-V en Do mayor, muy común en pop y rock. También conocida como "progresión pop".',
+      data: { key: 'C', progression: 'vi-IV-I-V', style: 'pop' }
+    },
+    {
+      id: 'identify-blues-1',
+      type: 'progression-inverse',
+      question: 'C7 - F7 - C7 - G7',
+      answer: 'Blues de 12 compases en Do',
+      options: ['Blues de 12 compases en Do', 'I-IV-I-V en Do mayor', 'Progresión modal en Do mixolidio', 'Cadencia plagal extendida'],
+      explanation: 'C7-F7-C7-G7 son los primeros 4 compases del blues estándar de 12 compases en Do. Todos son acordes dominantes.',
+      data: { key: 'C', form: '12-bar-blues', measures: '1-4' }
+    },
+    {
+      id: 'identify-modal-1',
+      type: 'progression-inverse',
+      question: 'Em7 - Am7 - Em7 - Am7',
+      answer: 'Vamp en Mi dórico',
+      options: ['Vamp en Mi dórico', 'ii-v en La menor', 'iii-vi en Do mayor', 'i-iv en Mi menor'],
+      explanation: 'Em7-Am7 es un vamp típico de Mi dórico. Am7 (IV grado) con su Do natural es la nota característica del modo dórico.',
+      data: { key: 'E', mode: 'dorian', type: 'vamp' }
+    },
+    {
+      id: 'identify-secondary-dominant-1',
+      type: 'progression-inverse',
+      question: 'Cmaj7 - E7 - Am7 - D7',
+      answer: 'I - V7/vi - vi - V7/ii en Do mayor',
+      options: ['I - V7/vi - vi - V7/ii en Do mayor', 'I - III7 - vi - II7 en Do mayor', 'Progresión cromática descendente', 'Modulación a La menor'],
+      explanation: 'E7 es V7/vi (dominante secundario de Am), y D7 es V7/ii (dominante secundario que prepara Dm7). Secuencia de dominantes secundarios.',
+      data: { key: 'C', technique: 'secondary-dominants', targets: ['vi', 'ii'] }
+    },
+    {
+      id: 'identify-tritone-sub-1',
+      type: 'progression-inverse',
+      question: 'Dm7 - Db7 - Cmaj7',
+      answer: 'ii - bII7 - I (sustitución tritónica)',
+      options: ['ii - bII7 - I (sustitución tritónica)', 'ii - V7 - I normal', 'Modulación cromática', 'Progresión modal'],
+      explanation: 'Db7 sustituye a G7 (sustitución tritónica). Ambos acordes comparten el mismo tritono (B-F), pero Db7 crea movimiento cromático.',
+      data: { key: 'C', technique: 'tritone-substitution', original: 'G7', substitute: 'Db7' }
+    },
+    {
+      id: 'identify-modal-interchange-1',
+      type: 'progression-inverse',
+      question: 'C - Ab - Bb - F',
+      answer: 'I - bVI - bVII - IV (intercambio modal)',
+      options: ['I - bVI - bVII - IV (intercambio modal)', 'I - VI - VII - IV mayor', 'Progresión en Do menor', 'Modulación a Fa mayor'],
+      explanation: 'Ab y Bb son acordes prestados del menor paralelo (Do menor). Esta progresión combina mayor natural con menor natural.',
+      data: { key: 'C', technique: 'modal-interchange', borrowed: ['bVI', 'bVII'] }
+    },
+    {
+      id: 'identify-neapolitan-1',
+      type: 'progression-inverse',
+      question: 'Am - Bb - E7 - Am',
+      answer: 'i - bII - V7 - i (sexta napolitana)',
+      options: ['i - bII - V7 - i (sexta napolitana)', 'i - II - V7 - i normal', 'Progresión modal', 'Blues menor'],
+      explanation: 'Bb es la sexta napolitana en La menor (bII grado). Crea una sonoridad clásica muy expresiva antes de la dominante.',
+      data: { key: 'Am', technique: 'neapolitan-sixth', chord: 'Bb' }
+    },
+    {
+      id: 'identify-augmented-sixth-1',
+      type: 'progression-inverse',
+      question: 'C - F/Ab - G7 - C',
+      answer: 'I - It+6 - V7 - I (sexta aumentada italiana)',
+      options: ['I - It+6 - V7 - I (sexta aumentada italiana)', 'I - iv6 - V7 - I', 'Progresión cromática', 'Modulación temporal'],
+      explanation: 'F/Ab es la sexta aumentada italiana. El intervalo Ab-F# (sexta aumentada) resuelve expandiéndose a G.',
+      data: { key: 'C', technique: 'italian-augmented-sixth', resolution: 'V7' }
+    },
+    {
+      id: 'identify-circle-fifths-1',
+      type: 'progression-inverse',
+      question: 'Em7 - A7 - Dm7 - G7 - Cmaj7',
+      answer: 'Círculo de quintas: iii - VI7 - ii - V7 - I',
+      options: ['Círculo de quintas: iii - VI7 - ii - V7 - I', 'Progresión diatónica simple', 'Modulación a Em', 'Secuencia cromática'],
+      explanation: 'Las fundamentales descienden por quintas: E-A-D-G-C. A7 es dominante secundario (V7/ii) que intensifica la progresión.',
+      data: { key: 'C', technique: 'circle-of-fifths', pattern: 'descending-fifths' }
+    }
+  ]
+};
+
+// GRUPO 3: ESCALAS Y MODOS
+const scaleModeGroup: QuestionGroup = {
+  id: 'scale-modes',
+  name: 'Escalas y Modos',
+  description: 'Relaciona escalas con acordes y contextos armónicos',
+  category: 'scale-mode',
+  totalQuestions: 12,
+  questions: [
+    {
+      id: 'dorian-chord-1',
+      type: 'scale-mode',
+      question: '¿Qué escala/modo funciona mejor sobre Dm7 en un contexto modal?',
+      answer: 'Re dórico',
+      options: ['Re dórico', 'Re menor natural', 'Re menor armónica', 'Re frigio'],
+      explanation: 'Re dórico es perfecto para Dm7 modal. Su 6ª mayor (Si natural) crea el color característico del modo dórico.',
+      data: { chord: 'Dm7', mode: 'dorian', characteristic: 'B natural' }
+    },
+    {
+      id: 'mixolydian-chord-1',
+      type: 'scale-mode',
+      question: '¿Qué modo se usa típicamente sobre G7 en una progresión ii-V-I?',
+      answer: 'Sol mixolidio',
+      options: ['Sol mixolidio', 'Sol mayor', 'Sol dórico', 'Sol lidio'],
+      explanation: 'Sol mixolidio (5º modo de Do mayor) es ideal para G7 en ii-V-I. Su 7ª menor (Fa) define el carácter dominante.',
+      data: { chord: 'G7', mode: 'mixolydian', context: 'ii-V-I' }
+    },
+    {
+      id: 'altered-scale-1',
+      type: 'scale-mode',
+      question: '¿Qué escala proporciona las tensiones alteradas para G7alt?',
+      answer: 'Sol alterada (super locrio)',
+      options: ['Sol alterada (super locrio)', 'Sol mixolidio b6', 'Sol frigio dominante', 'Sol disminuida'],
+      explanation: 'La escala alterada (7º modo de la menor melódica) proporciona b9, #9, #11 y b13 para acordes dominantes alterados.',
+      data: { chord: 'G7alt', scale: 'altered', tensions: ['b9', '#9', '#11', 'b13'] }
+    },
+    {
+      id: 'lydian-chord-1',
+      type: 'scale-mode',
+      question: '¿Qué modo evita las notas evitadas en Fmaj7?',
+      answer: 'Fa lidio',
+      options: ['Fa lidio', 'Fa jónico', 'Fa mixolidio', 'Fa dórico'],
+      explanation: 'Fa lidio evita el Bb (nota evitada en Fmaj7) usando Si natural (#11). Crea un sonido más abierto y moderno.',
+      data: { chord: 'Fmaj7', mode: 'lydian', avoids: 'Bb', uses: 'B natural' }
+    },
+    {
+      id: 'phrygian-chord-1',
+      type: 'scale-mode',
+      question: '¿Qué modo español se usa sobre Em en flamenco?',
+      answer: 'Mi frigio',
+      options: ['Mi frigio', 'Mi menor natural', 'Mi dórico', 'Mi menor armónica'],
+      explanation: 'Mi frigio, con su 2ª menor (Fa), es fundamental en flamenco. Crea la sonoridad española característica.',
+      data: { chord: 'Em', mode: 'phrygian', style: 'flamenco', characteristic: 'F natural' }
+    },
+    {
+      id: 'locrian-chord-1',
+      type: 'scale-mode',
+      question: '¿Qué modo se usa sobre Bm7b5 en ii-V-i menor?',
+      answer: 'Si locrio',
+      options: ['Si locrio', 'Si frigio', 'Si menor natural', 'Si dórico'],
+      explanation: 'Si locrio (7º modo de Do mayor) es perfecto para Bm7b5. Su 5ª disminuida (Fa) define el acorde semidisminuido.',
+      data: { chord: 'Bm7b5', mode: 'locrian', context: 'ii-V-i minor' }
+    },
+    {
+      id: 'harmonic-minor-1',
+      type: 'scale-mode',
+      question: '¿Qué escala se usa sobre E7 cuando resuelve a Am?',
+      answer: 'Mi frigio dominante (5º modo de La menor armónica)',
+      options: ['Mi frigio dominante (5º modo de La menor armónica)', 'Mi mixolidio', 'Mi alterada', 'Mi mayor'],
+      explanation: 'El frigio dominante (5º modo de la menor armónica) es ideal para dominantes que resuelven a menor. Contiene la sensible (G#).',
+      data: { chord: 'E7', scale: 'phrygian-dominant', resolution: 'Am', mode: '5th harmonic minor' }
+    },
+    {
+      id: 'melodic-minor-modes-1',
+      type: 'scale-mode',
+      question: '¿Qué modo de la menor melódica se usa sobre Cmaj7#5?',
+      answer: 'Do lidio aumentado (3er modo)',
+      options: ['Do lidio aumentado (3er modo)', 'Do lidio', 'Do jónico #5', 'Do alterado'],
+      explanation: 'El lidio aumentado (3er modo de la menor melódica) combina la 4ª aumentada lydian con la 5ª aumentada del acorde.',
+      data: { chord: 'Cmaj7#5', mode: 'lydian-augmented', parent: '3rd melodic minor' }
+    },
+    {
+      id: 'bebop-scales-1',
+      type: 'scale-mode',
+      question: '¿Qué nota cromática añade la escala bebop mayor a Do mayor?',
+      answer: 'G# (entre G y A)',
+      options: ['G# (entre G y A)', 'F# (entre F y G)', 'D# (entre D y E)', 'A# (entre A y B)'],
+      explanation: 'La escala bebop mayor añade G# como nota de paso cromática, creando una escala de 8 notas ideal para líneas melódicas.',
+      data: { scale: 'bebop-major', key: 'C', chromatic_note: 'G#', position: 'between G and A' }
+    },
+    {
+      id: 'pentatonic-over-chords-1',
+      type: 'scale-mode',
+      question: '¿Qué pentatónica crea un sonido #11 sobre Cmaj7?',
+      answer: 'Pentatónica de D (D-E-F#-A-B)',
+      options: ['Pentatónica de D (D-E-F#-A-B)', 'Pentatónica de G (G-A-B-D-E)', 'Pentatónica de C (C-D-E-G-A)', 'Pentatónica de F (F-G-A-C-D)'],
+      explanation: 'La pentatónica de D sobre Cmaj7 aporta F# como #11, creando un sonido lydio moderno muy usado en jazz contemporáneo.',
+      data: { chord: 'Cmaj7', pentatonic: 'D', effect: '#11 lydian sound', notes: ['D', 'E', 'F#', 'A', 'B'] }
+    },
+    {
+      id: 'symmetric-scales-1',
+      type: 'scale-mode',
+      question: '¿Qué escala simétrica se usa sobre C7 con tensiones b9 y #11?',
+      answer: 'Escala disminuida (semitono-tono)',
+      options: ['Escala disminuida (semitono-tono)', 'Escala de tonos enteros', 'Escala alterada', 'Escala cromática'],
+      explanation: 'La escala disminuida semitono-tono proporciona b9, #11 y 13 natural, perfecta para acordes dominantes con estas tensiones específicas.',
+      data: { chord: 'C7', scale: 'diminished half-whole', tensions: ['b9', '#11', '13'] }
+    },
+    {
+      id: 'whole-tone-1',
+      type: 'scale-mode',
+      question: '¿Sobre qué tipo de acorde funciona mejor la escala de tonos enteros?',
+      answer: 'Acordes dominantes con #11 y b13',
+      options: ['Acordes dominantes con #11 y b13', 'Acordes mayores', 'Acordes menores', 'Acordes disminuidos'],
+      explanation: 'La escala de tonos enteros es ideal para dominantes con #11 y b13. Su estructura simétrica crea una sonoridad suspendida única.',
+      data: { scale: 'whole-tone', best_use: 'dominant chords', tensions: ['#11', 'b13'], character: 'suspended' }
+    }
+  ]
+};
 export { basicProgressionGroup, advancedProgressionGroup, ethnicProgressionGroup };
