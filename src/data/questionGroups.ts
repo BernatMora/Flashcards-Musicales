@@ -583,13 +583,13 @@ const ethnicProgressionGroup: QuestionGroup = {
 // Export all question groups as an array
 export const questionGroups = [
   basicProgressionGroup,
+  advancedProgressionGroup,
+  ethnicProgressionGroup,
   inverseProgressionGroup,
   scaleModeGroup
 ];
-  basicProgressionGroup,
-export { basicProgressionGroup, inverseProgressionGroup, scaleModeGroup };
-  ethnicProgressionGroup
-];
+
+export { basicProgressionGroup, advancedProgressionGroup, ethnicProgressionGroup, inverseProgressionGroup, scaleModeGroup };
 
 // GRUPO 2: PROGRESIONES INVERSAS - IDENTIFICACIÓN
 const inverseProgressionGroup: QuestionGroup = {
@@ -810,4 +810,3 @@ const scaleModeGroup: QuestionGroup = {
     }
   ]
 };
-export { basicProgressionGroup, advancedProgressionGroup, ethnicProgressionGroup };
